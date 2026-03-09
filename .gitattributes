@@ -1,0 +1,43 @@
+# Auto-detect text files and normalise line endings
+* text=auto
+
+# Java
+*.java text diff=java
+*.properties text
+*.xml text
+*.yaml text
+*.yml text
+
+# Web / Slides
+*.html text diff=html
+*.css text diff=css
+*.js text
+*.json text
+
+# Docs
+*.md text diff=markdown
+*.txt text
+
+# Shell
+*.sh text eol=lf
+
+# Images (binary)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+
+# Archives (binary)
+*.jar binary
+*.war binary
+*.ear binary
+*.zip binary
+*.gz binary
+
+# Fonts
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
