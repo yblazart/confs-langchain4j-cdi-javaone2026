@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:ollama
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+      - "8080:8080"
+      - "8000:8000"
+      - "8081:8081"
+      - "8090:8090"
+    volumes:
+      - ollama-data:/root/.ollama
+
+volumes:
+  ollama-data:

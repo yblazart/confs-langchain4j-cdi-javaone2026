@@ -1,0 +1,38 @@
+{
+  "name": "LangChain4j-CDI JavaOne 2026",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic"
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "redhat.vscode-microprofile",
+        "redhat.vscode-xml"
+      ]
+    }
+  },
+
+  "forwardPorts": [8080, 8000, 8081, 8090, 11434],
+  "portsAttributes": {
+    "8080": { "label": "WildFly (Demos)", "onAutoForward": "notify" },
+    "8000": { "label": "Slides (Reveal.js)", "onAutoForward": "notify" },
+    "8081": { "label": "MCP Server (Demo 3)", "onAutoForward": "silent" },
+    "8090": { "label": "MCP SSE (Demo 3)", "onAutoForward": "silent" },
+    "11434": { "label": "Ollama", "onAutoForward": "silent" }
+  },
+
+  "postCreateCommand": ".devcontainer/post-create.sh",
+
+  "remoteUser": "vscode"
+}
