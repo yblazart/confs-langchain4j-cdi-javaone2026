@@ -9,28 +9,28 @@ import java.util.stream.Collectors;
 
 /**
  * CDI Bean providing booking tools for the AI assistant.
- * Connected to the ConferenceRepository (in-memory) for realistic results.
+ * Connected to the ShowRepository (in-memory) for realistic results.
  */
 @ApplicationScoped
 public class BookingTools {
 
     @Inject
-    ConferenceRepository repository;
+    ShowRepository repository;
 
-    @Tool("Lists all available conference sessions with their remaining seats")
+    @Tool("Lists all available Las Vegas shows with their remaining seats")
     public String listSessions() {
-        List<ConferenceSession> all = repository.listAll();
+        List<Show> all = repository.listAll();
         return all.stream()
                 .map(s -> s.getId() + " | " + s.toString())
                 .collect(Collectors.joining("\n"));
     }
 
-    @Tool("Registers a person for a conference session. Use the identifier returned by listSessions.")
+    @Tool("Books a person for a Las Vegas show. Use the identifier returned by listSessions.")
     public String register(
-            @P("Identifier (e.g.: jug-feb) or partial title of the session") String sessionId,
+            @P("Identifier (e.g.: cirque-o) or partial title of the show") String sessionId,
             @P("First name of the person") String firstName,
             @P("Last name of the person") String lastName) {
-        ConferenceSession session = repository.findById(sessionId);
+        Show session = repository.findById(sessionId);
         if (session == null) {
             session = repository.findByTitle(sessionId);
         }
@@ -49,12 +49,12 @@ public class BookingTools {
                 + "'. Remaining seats: " + session.getRemainingPlaces() + "/" + session.getCapacity();
     }
 
-    @Tool("Cancels a person's registration for a session. Use the identifier returned by listSessions.")
+    @Tool("Cancels a person's booking for a show. Use the identifier returned by listSessions.")
     public String cancelRegistration(
-            @P("Identifier (e.g.: jug-feb) or partial title of the session") String sessionId,
+            @P("Identifier (e.g.: cirque-o) or partial title of the show") String sessionId,
             @P("First name of the person") String firstName,
             @P("Last name of the person") String lastName) {
-        ConferenceSession session = repository.findById(sessionId);
+        Show session = repository.findById(sessionId);
         if (session == null) {
             session = repository.findByTitle(sessionId);
         }
@@ -69,9 +69,9 @@ public class BookingTools {
         return fullName + " is not registered for " + session.getTitle();
     }
 
-    @Tool("Returns the number of remaining seats for a session. Use the identifier returned by listSessions.")
-    public String remainingPlaces(@P("Identifier (e.g.: jug-feb) or partial title of the session") String sessionId) {
-        ConferenceSession session = repository.findById(sessionId);
+    @Tool("Returns the number of remaining seats for a show. Use the identifier returned by listSessions.")
+    public String remainingPlaces(@P("Identifier (e.g.: cirque-o) or partial title of the show") String sessionId) {
+        Show session = repository.findById(sessionId);
         if (session == null) {
             session = repository.findByTitle(sessionId);
         }
@@ -81,12 +81,12 @@ public class BookingTools {
         return session.getTitle() + ": " + session.getRemainingPlaces() + " remaining seats out of " + session.getCapacity();
     }
 
-    @Tool("Lists all registrations for a person")
+    @Tool("Lists all show bookings for a person")
     public String myRegistrations(
             @P("First name of the person") String firstName,
             @P("Last name of the person") String lastName) {
         String fullName = firstName + " " + lastName;
-        List<ConferenceSession> regs = repository.findRegistrations(fullName);
+        List<Show> regs = repository.findBookings(fullName);
         if (regs.isEmpty()) {
             return fullName + " is not registered for any session.";
         }

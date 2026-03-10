@@ -3,68 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo 2 — FT + Memory + Tools</title>
+    <title>Vegas Show Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
-            background: #0d1117; color: #c9d1d9;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0a12; color: #e8e0d4;
             height: 100vh; display: flex; flex-direction: column; overflow: hidden;
         }
         header {
-            background: #161b22; border-bottom: 1px solid #30363d;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16082b 50%, #0d0618 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem;
-            flex-shrink: 0;
+            flex-shrink: 0; position: relative; overflow: hidden;
         }
-        header h1 { font-size: 1.2rem; color: #d2a8ff; }
+        header::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, #ff6b9d, #d4af37, transparent);
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #d4af37, #f5d77a, #d4af37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.02em;
+        }
         header .badge {
-            background: #238636; color: #fff; font-size: 0.7rem;
-            padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600;
+            background: linear-gradient(135deg, #238636, #2ea043); color: #fff;
+            font-size: 0.65rem; padding: 0.2rem 0.7rem; border-radius: 12px;
+            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
         }
         header .session-id {
-            color: #484f58; font-size: 0.65rem;
-            font-family: monospace;
+            color: rgba(212, 175, 55, 0.4); font-size: 0.6rem;
+            font-family: 'Inter', monospace;
         }
         header .debug-btn {
             margin-left: auto;
-            background: #30363d; color: #8b949e; border: 1px solid #484f58;
-            padding: 0.3rem 0.7rem; border-radius: 4px; cursor: pointer;
+            background: rgba(212, 175, 55, 0.1); color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer;
             font-family: inherit; font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.03em; transition: all 0.2s;
         }
-        header .debug-btn:hover { background: #484f58; color: #c9d1d9; }
+        header .debug-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
         #chat {
             flex: 1; overflow-y: auto; padding: 1.5rem 2rem;
             display: flex; flex-direction: column; gap: 1rem;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(255, 107, 157, 0.03) 0%, transparent 50%),
+                #0a0a12;
         }
-        .msg { max-width: 75%; padding: 0.8rem 1rem; border-radius: 8px; line-height: 1.5; }
-        .msg.user { align-self: flex-end; background: #1f6feb; color: #fff; }
-        .msg.bot { align-self: flex-start; background: #21262d; border: 1px solid #30363d; }
+        .msg {
+            max-width: 75%; padding: 0.9rem 1.1rem; border-radius: 10px;
+            line-height: 1.6; font-size: 0.92rem;
+        }
+        .msg.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #8b2252, #a0306a);
+            color: #fff; border: 1px solid rgba(255, 107, 157, 0.2);
+        }
+        .msg.bot {
+            align-self: flex-start;
+            background: rgba(26, 10, 46, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #e8e0d4;
+        }
         .msg.bot pre { white-space: pre-wrap; font-family: inherit; }
-        .msg.error { align-self: center; background: #da3633; color: #fff; font-size: 0.85rem; }
+        .msg.error {
+            align-self: center;
+            background: linear-gradient(135deg, #8b0000, #a02020);
+            color: #fff; font-size: 0.85rem;
+            border: 1px solid rgba(255, 80, 80, 0.3);
+        }
         #input-bar {
-            background: #161b22; border-top: 1px solid #30363d;
+            background: linear-gradient(135deg, #1a0a2e, #16082b);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
             padding: 1rem 2rem; display: flex; gap: 0.8rem;
             flex-shrink: 0;
         }
         #message {
-            flex: 1; background: #0d1117; border: 1px solid #30363d;
-            color: #c9d1d9; padding: 0.7rem 1rem; border-radius: 6px;
+            flex: 1; background: rgba(10, 10, 18, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: #e8e0d4; padding: 0.7rem 1rem; border-radius: 8px;
             font-family: inherit; font-size: 0.95rem; outline: none;
+            transition: border-color 0.2s;
         }
-        #message:focus { border-color: #d2a8ff; }
-        #message::placeholder { color: #484f58; }
-        button {
-            background: #8957e5; color: #fff; border: none;
-            padding: 0.7rem 1.5rem; border-radius: 6px; cursor: pointer;
+        #message:focus { border-color: #d4af37; box-shadow: 0 0 12px rgba(212, 175, 55, 0.15); }
+        #message::placeholder { color: rgba(212, 175, 55, 0.35); }
+        button#send-btn {
+            background: linear-gradient(135deg, #d4af37, #c49b2f);
+            color: #1a0a2e; border: none;
+            padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer;
             font-family: inherit; font-weight: 600; font-size: 0.95rem;
+            letter-spacing: 0.03em; transition: all 0.2s;
         }
-        button:hover { background: #a371f7; }
-        .loading { pointer-events: none; }
+        button#send-btn:hover {
+            background: linear-gradient(135deg, #f5d77a, #d4af37);
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+        }
+        .loading { pointer-events: none; opacity: 0.7; }
         .spinner { display: none; }
-        .loading .spinner { display: inline-flex; gap: 3px; align-items: center; }
+        .loading .spinner { display: inline-flex; gap: 4px; align-items: center; }
         .loading .label { display: none; }
         .dot {
-            width: 6px; height: 6px; background: #fff; border-radius: 50%;
+            width: 6px; height: 6px; background: #1a0a2e; border-radius: 50%;
             animation: bounce 1.2s infinite ease-in-out;
         }
         .dot:nth-child(2) { animation-delay: 0.15s; }
@@ -74,45 +124,71 @@
             40% { transform: scale(1); opacity: 1; }
         }
         .welcome {
-            text-align: center; color: #8b949e; margin: auto;
-            font-size: 0.9rem; line-height: 1.8;
+            text-align: center; color: rgba(232, 224, 212, 0.6); margin: auto;
+            font-size: 0.92rem; line-height: 2;
+        }
+        .welcome .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #d4af37, #f5d77a, #d4af37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block; margin-bottom: 0.5rem;
+        }
+        .welcome .subtitle {
+            color: #ff6b9d; font-size: 0.8rem; font-weight: 500;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            margin-bottom: 1rem;
         }
         .welcome code {
-            background: #21262d; padding: 0.15rem 0.4rem; border-radius: 4px;
-            color: #f0883e; font-size: 0.85rem;
+            background: rgba(212, 175, 55, 0.1); padding: 0.15rem 0.5rem;
+            border-radius: 4px; color: #d4af37; font-size: 0.85rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
         .hints {
-            background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-            padding: 0.8rem 1rem; margin: 0.5rem 2rem; font-size: 0.75rem; color: #8b949e;
+            background: rgba(26, 10, 46, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;
+            padding: 0.8rem 1rem; margin: 0.5rem 2rem;
+            font-size: 0.72rem; color: rgba(232, 224, 212, 0.5);
             flex-shrink: 0;
         }
-        .hints strong { color: #d2a8ff; }
+        .hints strong { color: #d4af37; }
+        .hints code {
+            background: rgba(212, 175, 55, 0.1); padding: 0.1rem 0.3rem;
+            border-radius: 3px; color: #ff6b9d; font-size: 0.7rem;
+        }
 
         /* Memory modal */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(0, 0, 0, 0.7); z-index: 100;
+            background: rgba(10, 10, 18, 0.85); z-index: 100;
             justify-content: center; align-items: center;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
         }
         .modal-overlay.open { display: flex; }
         .modal {
-            background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+            background: linear-gradient(135deg, #1a0a2e, #16082b);
+            border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 12px;
             width: 90%; max-width: 700px; max-height: 80vh;
             display: flex; flex-direction: column;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.08);
         }
         .modal-header {
             display: flex; align-items: center; gap: 0.8rem;
-            padding: 1rem 1.2rem; border-bottom: 1px solid #30363d;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-        .modal-header h2 { font-size: 1rem; color: #d2a8ff; flex: 1; }
-        .modal-header .meta { font-size: 0.7rem; color: #8b949e; }
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; color: #d4af37; flex: 1;
+        }
+        .modal-header .meta { font-size: 0.7rem; color: rgba(232, 224, 212, 0.4); }
         .modal-close {
-            background: none; border: none; color: #8b949e; font-size: 1.3rem;
-            cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px;
+            background: none; border: none; color: rgba(232, 224, 212, 0.4);
+            font-size: 1.3rem; cursor: pointer; padding: 0.2rem 0.5rem;
+            border-radius: 4px; transition: all 0.2s;
         }
-        .modal-close:hover { background: #21262d; color: #c9d1d9; }
+        .modal-close:hover { background: rgba(212, 175, 55, 0.1); color: #d4af37; }
         .modal-body {
             overflow-y: auto; padding: 1rem 1.2rem;
             display: flex; flex-direction: column; gap: 0.6rem;
@@ -125,23 +201,21 @@
             font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
             margin-bottom: 0.3rem; letter-spacing: 0.05em;
         }
-        .mem-msg .mem-content {
-            white-space: pre-wrap; word-break: break-word;
-        }
-        .mem-msg.SYSTEM { background: #1c1e26; border-color: #8b949e; }
-        .mem-msg.SYSTEM .mem-label { color: #8b949e; }
-        .mem-msg.USER { background: #0d2240; border-color: #1f6feb; }
-        .mem-msg.USER .mem-label { color: #58a6ff; }
-        .mem-msg.AI { background: #1e1535; border-color: #8957e5; }
-        .mem-msg.AI .mem-label { color: #d2a8ff; }
-        .mem-msg.TOOL_EXECUTION_RESULT { background: #1a2312; border-color: #238636; }
+        .mem-msg .mem-content { white-space: pre-wrap; word-break: break-word; }
+        .mem-msg.SYSTEM { background: rgba(100, 100, 120, 0.1); border-color: #6e6e80; }
+        .mem-msg.SYSTEM .mem-label { color: #6e6e80; }
+        .mem-msg.USER { background: rgba(139, 34, 82, 0.15); border-color: #ff6b9d; }
+        .mem-msg.USER .mem-label { color: #ff6b9d; }
+        .mem-msg.AI { background: rgba(212, 175, 55, 0.08); border-color: #d4af37; }
+        .mem-msg.AI .mem-label { color: #d4af37; }
+        .mem-msg.TOOL_EXECUTION_RESULT { background: rgba(35, 134, 54, 0.1); border-color: #2ea043; }
         .mem-msg.TOOL_EXECUTION_RESULT .mem-label { color: #7ee787; }
-        .mem-empty { text-align: center; color: #484f58; padding: 2rem; font-size: 0.85rem; }
+        .mem-empty { text-align: center; color: rgba(232, 224, 212, 0.3); padding: 2rem; font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Demo 2 — FT + Memory + Tools</h1>
+        <h1>Vegas Show Concierge</h1>
         <span class="badge">SOLUTION</span>
         <button class="debug-btn" onclick="openMemory()">Memory</button>
         <span class="session-id" id="session-display"></span>
@@ -155,11 +229,12 @@
 
     <div id="chat">
         <div class="welcome">
-            <p>Booking assistant for <code>JavaOne</code></p>
-            <p>Try: "What sessions are available?"</p>
-            <p>then: "I'm Yann Blazart, register me for Day 1"</p>
-            <p>then: "How many seats are left?" or "My registrations?"</p>
-            <p style="margin-top:0.5rem; font-size:0.8rem; color:#6e7681;">
+            <span class="venue-name">Las Vegas Shows</span>
+            <p class="subtitle">Your personal show concierge</p>
+            <p>Try: <code>What shows are available?</code></p>
+            <p>Then: <code>I'm Yann Blazart, book me for Cirque du Soleil O</code></p>
+            <p>Then: <code>How many seats are left?</code> or <code>My bookings?</code></p>
+            <p style="margin-top:0.8rem; font-size:0.78rem; color:rgba(232,224,212,0.35);">
                 Open a 2nd tab to see separate memory!
             </p>
         </div>
@@ -167,9 +242,9 @@
 
     <div id="input-bar">
         <input type="text" id="message" autocomplete="off"
-               placeholder="Register for JavaOne sessions...">
+               placeholder="Ask about shows, book tickets...">
         <button id="send-btn" onclick="sendMessage()">
-            <span class="label">Send</span>
+            <span class="label">Book</span>
             <span class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
         </button>
     </div>
@@ -187,7 +262,6 @@
     </div>
 
     <script>
-        // Each tab has its own session ID -> separate memory
         const SESSION_ID = crypto.randomUUID();
         document.getElementById('session-display').textContent = 'session: ' + SESSION_ID.substring(0, 8) + '...';
 

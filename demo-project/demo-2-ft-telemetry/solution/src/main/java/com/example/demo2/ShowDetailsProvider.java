@@ -15,13 +15,13 @@ import jakarta.inject.Named;
 
 /**
  * CDI producer for the RAG ContentRetriever.
- * Ingests conference session data into an in-memory embedding store at startup.
+ * Ingests show details into an in-memory embedding store at startup.
  */
 @ApplicationScoped
-public class KnowledgeBaseProvider {
+public class ShowDetailsProvider {
 
     @Inject
-    ConferenceRepository repository;
+    ShowRepository repository;
 
     @Produces
     @Named("my-rag")
@@ -39,9 +39,9 @@ public class KnowledgeBaseProvider {
                 .embeddingStore(store)
                 .build();
 
-        for (ConferenceSession session : repository.listAll()) {
-            ingestor.ingest(Document.from(session.toRagDocument(),
-                    Metadata.from("sessionId", session.getId())));
+        for (Show show : repository.listAll()) {
+            ingestor.ingest(Document.from(show.toRagDocument(),
+                    Metadata.from("showId", show.getId())));
         }
 
         return EmbeddingStoreContentRetriever.builder()

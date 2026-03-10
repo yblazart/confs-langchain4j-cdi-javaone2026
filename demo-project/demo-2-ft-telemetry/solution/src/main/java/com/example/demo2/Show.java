@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents a conference session with its registrations.
+ * Represents a Las Vegas show with its bookings.
  * Stored in memory for the demo.
  */
-public class ConferenceSession {
+public class Show {
 
     private final String id;
     private final String title;
@@ -20,12 +20,12 @@ public class ConferenceSession {
     private final String prerequisites;
     private final List<String> registrations = new ArrayList<>();
 
-    public ConferenceSession(String id, String title, LocalDate date, int capacity) {
+    public Show(String id, String title, LocalDate date, int capacity) {
         this(id, title, date, capacity, null, null, null);
     }
 
-    public ConferenceSession(String id, String title, LocalDate date, int capacity,
-                             String speaker, String description, String prerequisites) {
+    public Show(String id, String title, LocalDate date, int capacity,
+                String speaker, String description, String prerequisites) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -68,12 +68,12 @@ public class ConferenceSession {
 
     public String toRagDocument() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Session: ").append(title).append("\n");
+        sb.append("Show: ").append(title).append("\n");
         sb.append("Date: ").append(date).append("\n");
         sb.append("Capacity: ").append(capacity).append(" seats\n");
-        if (speaker != null) sb.append("Speaker: ").append(speaker).append("\n");
+        if (speaker != null) sb.append("Performer: ").append(speaker).append("\n");
         if (description != null) sb.append("Description: ").append(description).append("\n");
-        if (prerequisites != null) sb.append("Prerequisites: ").append(prerequisites).append("\n");
+        if (prerequisites != null) sb.append("Requirements: ").append(prerequisites).append("\n");
         return sb.toString();
     }
 
