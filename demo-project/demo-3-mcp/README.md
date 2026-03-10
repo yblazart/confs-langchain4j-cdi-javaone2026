@@ -1,13 +1,13 @@
-# Demo 3 - 421 Dice Game at the Tavern with MCP
+# Demo 3 - 421 Dice Game at the Casino with MCP
 
 Fourth demo for JavaOne: play **421** (traditional French dice game) against an AI that uses the **MCP** protocol to manage dice rolls on WildFly.
 
 ## Overview
 
 1. A **standalone MCP server** exposes a dice rolling tool (roll_multiple for 3d6)
-2. An **AI tavern keeper agent** (Gunther Barrique-d'Or) connects to this server via `McpToolProvider`
+2. An **AI casino dealer agent** (Lucky Jack Diamond) connects to this server via `McpToolProvider`
 3. The agent runs a 421 game: rolls dice via MCP, evaluates combinations, and announces the winner
-4. A **tavern-themed web interface** lets you play in real time
+4. A **casino-themed web interface** lets you play in real time
 
 **MCP for gaming**: Your Jakarta EE agents can drive external game mechanics through standardized tools!
 
@@ -35,7 +35,7 @@ Fourth demo for JavaOne: play **421** (traditional French dice game) against an 
 ## Project Structure
 
 ```
-demo-3-dwarf-dice/
+demo-3-casino-dice/
 ├── pom.xml                          # Aggregator POM
 ├── mcp-server/                      # MCP dice rolling server (JAR)
 │   └── src/main/java/com/example/mcp/
@@ -44,19 +44,19 @@ demo-3-dwarf-dice/
 │   ├── src/main/java/com/example/demo4/
 │   │   ├── JaxRsActivator.java
 │   │   ├── McpConfig.java           # TODO: CDI producer
-│   │   ├── DwarfGameMaster.java     # TODO: @RegisterAIService (tavern keeper)
+│   │   ├── CasinoDealerAI.java      # TODO: @RegisterAIService (casino dealer)
 │   │   └── GameResource.java        # TODO: @Inject + call
 │   └── src/main/webapp/
 │       ├── WEB-INF/beans.xml
-│       └── index.html               # Tavern UI (ready!)
+│       └── index.html               # Casino UI (ready!)
 └── solution/                        # Complete solution
     ├── src/main/java/com/example/demo4/
     │   ├── McpConfig.java           # Complete
-    │   ├── DwarfGameMaster.java     # Complete (Gunther the tavern keeper)
+    │   ├── CasinoDealerAI.java      # Complete (Lucky Jack the casino dealer)
     │   └── GameResource.java        # Complete
     └── src/main/webapp/
         ├── WEB-INF/beans.xml
-        └── index.html               # Tavern UI
+        └── index.html               # Casino UI
 ```
 
 ## Getting Started
@@ -65,7 +65,7 @@ demo-3-dwarf-dice/
 
 ```bash
 # 1. Build the MCP dice server
-cd demo-3-dwarf-dice/mcp-server
+cd demo-3-casino-dice/mcp-server
 mvn clean package
 
 # 2. Launch the app with hot reload (base or solution)
@@ -79,7 +79,7 @@ The app is available at **http://localhost:8080/demo-3/** with an immersive game
 
 ```bash
 # 1. Build the entire project (MCP server + WAR with provisioned WildFly)
-cd demo-3-dwarf-dice/solution  # or base
+cd demo-3-casino-dice/solution  # or base
 mvn clean install
 
 # 2. Start the provisioned WildFly server
@@ -129,14 +129,14 @@ public McpToolProvider mcpToolProvider() {
 }
 ```
 
-### Step 3: Annotate DwarfGameMaster (the tavern keeper)
+### Step 3: Annotate CasinoDealerAI (the casino dealer)
 
 ```java
 @RegisterAIService(chatModelName = "ollama", toolProviderName = "mcp")
-public interface DwarfGameMaster {
+public interface CasinoDealerAI {
     @SystemMessage("""
-        You are Gunther Barrique-d'Or, the keeper of "The Golden Pickaxe" tavern.
-        You host a game of 421, the dwarves' favorite dice game!
+        You are Lucky Jack Diamond, the dealer at "The Golden Ace Casino".
+        You host a game of 421, the casino's favorite dice game!
 
         RULES OF 421:
         - Each player rolls 3 six-sided dice
@@ -152,7 +152,7 @@ public interface DwarfGameMaster {
         4. You roll 3d6 for yourself
         5. You compare and announce the winner
 
-        STYLE: Old grumpy but friendly dwarf, uses "By my beard!"
+        STYLE: Smooth and charismatic Vegas dealer, uses "Jackpot!"
         IMPORTANT: ALWAYS roll the dice with roll_multiple, NEVER make them up!
         """)
     String play(@UserMessage String playerAction);
@@ -162,7 +162,7 @@ public interface DwarfGameMaster {
 ### Step 4: Wire up the REST endpoint
 
 ```java
-@Inject DwarfGameMaster gameMaster;
+@Inject CasinoDealerAI gameMaster;
 
 @POST @Path("/play")
 public String play(String playerAction) {
@@ -186,14 +186,14 @@ Open **http://localhost:8080/demo-3/** and play:
 - "My turn"
 - "I roll"
 
-**To have Gunther roll:**
+**To have Lucky Jack roll:**
 - "Roll for yourself"
 - "Your turn"
 
 ## Execution Flow (simplified)
 
 ```
-REST endpoint -> DwarfGameMaster.play()
+REST endpoint -> CasinoDealerAI.play()
     -> LLM receives: "Roll the dice"
     -> LLM decides to use roll_multiple(count=3, sides=6)
     -> McpToolProvider -> JSON-RPC -> MCP Dice Server
@@ -203,7 +203,7 @@ REST endpoint -> DwarfGameMaster.play()
     -> LLM formats the response with the REQUIRED FORMAT:
        RESULT: [4, 2, 1]
        COMBINATION: 421 - The best one!
-    -> LLM adds a comment: "BY MY BEARD! A 421!"
+    -> LLM adds a comment: "JACKPOT! A 421!"
     -> Complete response sent back to the player
 ```
 
@@ -219,28 +219,28 @@ REST endpoint -> DwarfGameMaster.play()
 
 **Player:** "Roll the dice"
 
-**Gunther:**
+**Lucky Jack:**
 ```
-By my beard! Here we go, let's roll!
+Jackpot! Here we go, let's roll!
 
 RESULT: [4, 2, 1]
 COMBINATION: 421 - The best one!
 
-A THOUSAND CAULDRONS! A perfect 421! You have the luck of the gods!
+Ladies and gentlemen, we have a winner! A perfect 421! You have the luck of the gods!
 ```
 
-### Example 2: Gunther's turn
+### Example 2: Lucky Jack's turn
 
 **Player:** "Your turn"
 
-**Gunther:**
+**Lucky Jack:**
 ```
 My turn now!
 
 RESULT: [6, 6, 6]
 COMBINATION: Three of a Kind - sixes
 
-Great thunder! A magnificent three of a kind! But your 421 is unbeatable.
+Holy smokes! A magnificent three of a kind! But your 421 is unbeatable.
 You win this round!
 ```
 
@@ -248,7 +248,7 @@ You win this round!
 
 **Player:** "My turn"
 
-**Gunther:**
+**Lucky Jack:**
 ```
 RESULT: [3, 4, 5]
 COMBINATION: Straight
@@ -258,20 +258,20 @@ A nice straight! Not bad at all!
 
 **Player:** "Your turn"
 
-**Gunther:**
+**Lucky Jack:**
 ```
 RESULT: [5, 5, 2]
 COMBINATION: Pair of fives
 
 Just a pair... Your straight is better! You win the round!
-The beer's on me!
+Drinks are on the house!
 ```
 
 ### Example 4: Average result
 
 **Player:** "Roll the dice"
 
-**Gunther:**
+**Lucky Jack:**
 ```
 RESULT: [6, 3, 1]
 COMBINATION: Nothing
@@ -289,7 +289,7 @@ Well... nothing good this time. No luck!
 ## Troubleshooting
 
 - **MCP server won't start**: Check that the JAR is compiled (`cd mcp-server && mvn package`)
-- **Agent not responding**: Check that DwarfGameMaster is annotated and McpConfig exposes the producer with `@Named("mcp")`
+- **Agent not responding**: Check that CasinoDealerAI is annotated and McpConfig exposes the producer with `@Named("mcp")`
 - **No dice rolled**: Check WildFly logs for MCP tool calls
 - **Combinations miscalculated**: The LLM may make mistakes with smaller models - use `qwen2.5:3b` or larger
 - **Deploy the solution**: `cd solution && mvn clean wildfly:dev`
@@ -306,7 +306,7 @@ Well... nothing good this time. No luck!
 - **421 variants**: Add the re-roll rule (player can re-roll 1 or 2 dice)
 - **Tournament mode**: Play multiple rounds, keep score
 - **Other games**: Yahtzee, Poker Dice, 10000
-- **Multiplayer**: Multiple players against Gunther
-- **Betting**: Wager gold coins on each game
+- **Multiplayer**: Multiple players against Lucky Jack
+- **Betting**: Wager casino chips on each game
 - **Statistics**: Track wins/losses, best combinations
-- **Multiple tavern keepers**: Different characters with different play styles
+- **Multiple casino dealers**: Different characters with different play styles

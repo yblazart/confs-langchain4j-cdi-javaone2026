@@ -13,7 +13,7 @@
 
     <artifactId>demo-3-mcp</artifactId>
     <packaging>pom</packaging>
-    <name>LangChain4j-CDI Demo 3 - Dwarf Dice Game</name>
+    <name>LangChain4j-CDI Demo 3 - Casino Dice Game</name>
     <description>RPG game with AI game master and dice rolls via MCP</description>
 
     <modules>

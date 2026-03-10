@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🖼️ Image Analysis Forge — Dwarf Vision</title>
+    <title>🖼️ VIP Photo Booth — Vegas Vision</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -199,7 +199,7 @@
         function upload(file) {
             var statusDiv = document.getElementById("status");
             statusDiv.className = "visible loading";
-            statusDiv.innerHTML = "🔥 The dwarf is forging the analysis of: " + file.name;
+            statusDiv.innerHTML = "🔥 Lucky Jack is analyzing: " + file.name;
 
             var formData = new FormData();
             formData.append("file", file);
@@ -216,36 +216,36 @@
             var progress = Math.round(event.loaded / event.total * 100);
             var statusDiv = document.getElementById("status");
             statusDiv.className = "visible loading";
-            statusDiv.innerHTML = "⚒️ Forging in progress... " + progress + "%";
+            statusDiv.innerHTML = "🎰 Analysis in progress... " + progress + "%";
         }
 
         function uploadComplete(event) {
             var statusDiv = document.getElementById("status");
             statusDiv.className = "visible";
-            statusDiv.innerHTML = "💎 The old dwarf's vision:\n\n" + event.target.responseText;
+            statusDiv.innerHTML = "💎 Lucky Jack's verdict:\n\n" + event.target.responseText;
         }
 
         function uploadError(event) {
             var statusDiv = document.getElementById("status");
             statusDiv.className = "visible";
-            statusDiv.innerHTML = "⚠️ Error in the forge: " + event.target.statusText;
+            statusDiv.innerHTML = "⚠️ Technical difficulty: " + event.target.statusText;
         }
     </script>
 </head>
 <body>
     <header>
-        <h1>🖼️ Image Analysis Forge</h1>
+        <h1>🖼️ VIP Photo Booth</h1>
         <span class="badge">👁️ AI Vision</span>
-        <span class="subtitle">The keen eyes of the old dwarf</span>
-        <a href="index.html" style="margin-left: auto;">🏔️ Simple Chat</a>
+        <span class="subtitle">Lucky Jack's eagle eye</span>
+        <a href="index.html" style="margin-left: auto;">🎲 Simple Chat</a>
         <a href="stream.html">⚡ Streaming SSE</a>
     </header>
 
     <div class="container">
         <div class="info-box">
-            <h2>🍺 Welcome to the Image Analysis Forge!</h2>
+            <h2>🎰 Welcome to the VIP Photo Booth!</h2>
             <p>
-                The old dwarf can see things you cannot!
+                Lucky Jack can see things you cannot!
                 Drag and drop an image and he will tell you what he sees.
             </p>
             <p style="margin-top: 1rem;">
@@ -273,14 +273,14 @@
                 Env variable: <code>export GROQ_API_KEY=gsk_...</code>
             </p>
             <p style="margin-top: 1rem; font-size: 0.85rem; color: #8b6914;">
-                <em>"A dwarf sees in the dark... and in your pixels!"</em>
+                <em>"In Vegas, the house always sees everything... even your pixels!"</em>
             </p>
         </div>
 
         <div id="dropbox">
             <div class="icon">🖼️</div>
             <div class="text">Drag and drop an image here</div>
-            <div class="hint">JPG, PNG, GIF... The dwarf accepts them all!</div>
+            <div class="hint">JPG, PNG, GIF... The house accepts them all!</div>
         </div>
 
         <div id="status"></div>

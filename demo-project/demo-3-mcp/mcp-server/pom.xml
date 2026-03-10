@@ -9,10 +9,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dwarf-dice-roller</artifactId>
+    <artifactId>casino-dice-roller</artifactId>
     <packaging>war</packaging>
     <name>LangChain4j-CDI Demo 3 MCP Server</name>
-    <description>Complete MCP Server Dwarf Dice RPG game demo</description>
+    <description>Complete MCP Server Casino Dice game demo</description>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

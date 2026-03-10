@@ -6,7 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * REST endpoint for playing 421 in the dwarf tavern.
+ * REST endpoint for playing 421 in the Vegas casino.
  *
  * This endpoint exposes the AI agent that hosts the dice game
  * and uses MCP tools to manage dice rolls.
@@ -16,7 +16,7 @@ import jakarta.ws.rs.core.MediaType;
 public class GameResource {
 
     @Inject
-    DwarfGameMaster gameMaster;
+    CasinoDealerAI gameMaster;
 
     /**
      * Play an action in the 421 game.
@@ -27,7 +27,7 @@ public class GameResource {
      *
      * Roll the dice
      *
-     * The tavern keeper will:
+     * The dealer will:
      * 1. Roll 3d6 for the player via MCP
      * 2. Announce the combination
      * 3. Roll 3d6 for himself
@@ -42,7 +42,7 @@ public class GameResource {
     }
 
     /**
-     * Enter the tavern and start a game.
+     * Enter the casino and start a game.
      */
     @GET
     @Path("/start")
@@ -58,6 +58,6 @@ public class GameResource {
     @Path("/health")
     @Produces(MediaType.TEXT_PLAIN)
     public String health() {
-        return "The Golden Pickaxe Tavern OK - Gunther is ready for a game of 421!";
+        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of 421!";
     }
 }

@@ -6,7 +6,7 @@ import dev.langchain4j.service.UserMessage;
 public interface ChatAssistant {
 
     // TODO STEP 2 : Add @SystemMessage to define the behavior
-    // Example: a dwarf comedian who tells jokes about beer, gold and elves
+    // Example: a Vegas stand-up comedian who tells jokes about tourists, slots, and poker
     String chat(@UserMessage String userMessage);
 }
 

@@ -14,7 +14,7 @@
     <artifactId>demo-3-mcp-base</artifactId>
     <packaging>war</packaging>
     <name>LangChain4j-CDI Demo 3 Base (Live Coding)</name>
-    <description>Base WAR module for Dwarf Dice RPG game demo with TODOs</description>
+    <description>Base WAR module for Casino Dice game demo with TODOs</description>
 
     <dependencies>
         <!-- Jakarta EE -->

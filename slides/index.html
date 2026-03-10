@@ -228,9 +228,9 @@
     </p>
     <p class="small">JavaOne 2026</p>
     <aside class="notes">
-        Welcome everyone! We hope you are ready, because we are going to talk about serious stuff... well, as serious as possible after 3 beers.
+        Welcome everyone! We hope you're ready, because we're about to talk about serious stuff... well, as serious as two guys who built an AI framework can be.
 
-        Today we are going to show you how to do what the Quarkus extension does, but on ANY CDI server. Yes, even your good old WildFly that has been running in prod since 2015.
+        Today we're going to show you how to do what the Quarkus extension does, but on ANY CDI server. Yes, even your trusty WildFly that's been humming along in production since 2015.
     </aside>
 </section>
 
@@ -246,13 +246,13 @@
         <span class="fragment">Well... we haven't verified with a CAPTCHA yet.</span>
     </p>
     <p class="fragment small" style="margin-top: 1.5em; color: #999;">
-        No Jakarta EE developer was harmed during the production of these slides. But we won't talk about the elves 🧝<br>
+        No Jakarta EE developer was harmed during the production of these slides. But we won't talk about the odds in Vegas 🎰<br>
         <span class="fragment">The LLM, however, did 247 retries.</span>
     </p>
     <aside class="notes">
-        Disclaimer slide. Play along: we fully own that AI helped. It puts the audience in a good mood and fits perfectly with the topic of the session.
+        Disclaimer slide. Lean into it -- we fully own that AI helped build these slides. It gets a laugh and fits perfectly with the topic of the session.
 
-        If someone laughs at the CAPTCHA, follow up with: "By the way, if you want to verify us, ask us a question about traffic lights or crosswalks."
+        If someone laughs at the CAPTCHA line, follow up with: "Seriously though, if you want to verify us, ask us to identify traffic lights in a grid."
     </aside>
 </section>
 
@@ -316,7 +316,7 @@
     <aside class="notes">
         Emmanuel introduces himself (or Yann introduces him).
 
-        Emmanuel comes out of the mine after many long years spent collecting gems and nuggets.
+        Emmanuel comes out of the server room after many long years spent collecting bugs and patches.
 
         He integrates AI into WildFly: WildFly AI Feature Pack (LC4J-CDI, MCP Server, WASM WASI) and A2A Java/JakartaEE SDK.
 
@@ -342,11 +342,11 @@
     </div>
     <p class="fragment huge" style="margin-top: 0.5em;">So now what? 🤔</p>
     <aside class="notes">
-        You may have seen great demos with LangChain4j on Quarkus. It was beautiful, it was smooth, it worked on the first try (well, almost).
+        You may have seen great demos with LangChain4j on Quarkus. Slick, smooth, worked on the first try (well, almost).
 
-        But let's be honest: how many of you have WildFly in production? (raise your hand) Payara? Liberty? ... GlassFish? (sympathetic look)
+        But real talk: how many of you have WildFly in production? (hands up!) Payara? Liberty? ... GlassFish? (moment of silence)
 
-        The good news: you don't need to migrate everything to Quarkus to do AI. That's exactly why we created langchain4j-cdi.
+        Good news: you don't need to rip and replace your entire stack to do AI. That's exactly why we created langchain4j-cdi.
     </aside>
 </section>
 
@@ -362,11 +362,11 @@
         <em>"Inject an AI agent as naturally as an EntityManager"</em>
     </p>
     <aside class="notes">
-        The answer fits in a single annotation: @RegisterAIService.
+        The answer fits in one annotation: @RegisterAIService.
 
-        The idea is simple: CDI already knows how to inject everything in your applications. EntityManager, DataSource, REST services... so why not an AI agent?
+        Think about it -- CDI already injects everything in your apps. EntityManager, DataSource, REST clients... so why not an AI agent?
 
-        That's exactly what we did. We created a CDI extension that transforms an annotated interface into an injectable bean, connected to LangChain4j under the hood.
+        That's exactly what we built. A CDI extension that turns an annotated interface into an injectable bean, wired to LangChain4j under the hood. Same patterns you already know, brand new capabilities.
     </aside>
 </section>
 
@@ -406,9 +406,9 @@
         </div>
     </div>
     <aside class="notes">
-        Here is today's agenda. We alternate between Emmanuel and myself. Emmanuel will cover the CDI architecture and production aspects, and I handle the live demos.
+        Here's the game plan. We tag-team -- Emmanuel covers the CDI architecture and production aspects, I handle the live demos.
 
-        We go progressively from the simplest to the most complex. And if everything goes well, by the end you'll have a chatbot running on WildFly. If things don't go well... we'll have a great story for the next podcast.
+        We build up from simple to complex. If everything goes well, by the end you'll have a chatbot running on WildFly. If it doesn't... well, we'll have a great war story for the next podcast.
     </aside>
 </section>
 
@@ -441,9 +441,9 @@ Assistant assistant = AiServices.builder(Assistant.class)
     <aside class="notes">
         Emmanuel takes over here.
 
-        Look at this code. It's pure LangChain4j. It works, it's fine, but... it's procedural code. We instantiate everything by hand, we wire everything manually.
+        Look at this code. Pure LangChain4j. It works, sure, but... it's procedural. We instantiate everything by hand, wire everything manually.
 
-        As Jakarta EE developers, this hurts our eyes. We're used to injection, externalized configuration, container-managed lifecycle. This takes us 15 years back in time.
+        As Jakarta EE developers, this should make you cringe. We're used to injection, externalized config, container-managed lifecycle. This code feels like 2006 all over again.
     </aside>
 </section>
 
@@ -469,11 +469,11 @@ Assistant assistant;
 String response = assistant.chat("Book me a table");
     </code></pre>
     <aside class="notes">
-        And here is what it looks like with langchain4j-cdi. One interface, one annotation, and an @Inject.
+        And here's what it looks like with langchain4j-cdi. One interface, one annotation, one @Inject. Done.
 
-        That's it. No builder, no manual instantiation. The CDI container does all the work.
+        No builder, no manual instantiation. The CDI container handles all the wiring.
 
-        For those who know CDI, it's exactly the same pattern as a JPA repository or a REST client. Interface + annotation = injectable bean.
+        If you know CDI, this pattern is immediately familiar -- it's just like a JPA repository or a REST client. Interface + annotation = injectable bean. Same muscle memory, new superpowers.
     </aside>
 </section>
 
@@ -487,9 +487,9 @@ String response = assistant.chat("Book me a table");
         And with CDI 4.1, we even get injection... <em>at compile time</em>.
     </p>
     <aside class="notes">
-        Quick humor break. Injection is an art. And like all art, there are artists and butchers.
+        Quick humor break to let the architecture slide sink in. Injection is an art -- and like all art, there are artists and butchers.
 
-        Natural transition to CDI 4.1 and Build Compatible Extensions.
+        This sets up the transition to CDI 4.1 and Build Compatible Extensions.
     </aside>
 </section>
 
@@ -540,7 +540,7 @@ void enhance(ClassConfig cfg) {
 
         langchain4j-cdi provides both implementations. It's completely transparent: you don't change anything in your code, the right module activates based on your server.
 
-        And yes, it also runs on Quarkus! So technically, they could retire their own LangChain4j extension... (pause, smile) -- well, let's not tell them just yet, let's wait until they buy us a beer first.
+        And yes, it also runs on Quarkus! So technically, they could retire their own LangChain4j extension... (pause, smile) -- but let's not tell them just yet. Let's wait until they buy us dinner first.
     </aside>
 </section>
 
@@ -605,7 +605,7 @@ dev.langchain4j.cdi.plugin.my-retriever.config.embeddingStore=\
 
         The powerful thing is the lookup: you can reference other CDI beans directly from the config. lookup:@default for the default bean, lookup:@all for all, or lookup:name for a named bean.
 
-        Zero code. It's 2026, not 2006.
+        Zero code for configuration. It's 2026, folks -- not 2006.
 
         NOTE: For WildFly, there is also the WildFly AI subsystem that allows configuring models and MCP directly in standalone.xml. It's a native server integration, very powerful for enterprise deployments. We'll see it in demo 3.
     </aside>
@@ -630,11 +630,11 @@ dev.langchain4j.cdi.plugin.my-retriever.config.embeddingStore=\
         (If IntelliJ refuses to cooperate, we have backup slides 😅)
     </p>
     <aside class="notes">
-        OK, it's my turn! Switching to IntelliJ.
+        All right, my turn! Switching to IntelliJ -- fingers crossed the demo gods are with us.
 
-        I'm going to show you three examples that illustrate the power of langchain4j-cdi:
+        Three examples that show the power of langchain4j-cdi in action:
         1. Basic chat with CDI injection
-        2. Streaming for real-time responses (ChatGPT effect)
+        2. Streaming for real-time responses (the ChatGPT effect)
         3. Image analysis with a multimodal vision model
 
         DEMO CHECKLIST:
@@ -646,7 +646,7 @@ dev.langchain4j.cdi.plugin.my-retriever.config.embeddingStore=\
         6. Show the microprofile-config.properties
         7. Start WildFly
         8. Test basic chat
-        9. Test streaming (stream.html) with the dwarf song
+        9. Test streaming (stream.html) with the Vegas show number
         10. Test image analysis (image.html) with a photo
 
         If the demo crashes: backup slides follow.
@@ -667,10 +667,10 @@ import dev.langchain4j.cdi.RegisterAIService;
 public interface ChatAssistant {
 
     @SystemMessage("""
-        You are a dwarf comedian in a tavern. You tell dwarf jokes
-        full of self-deprecating humor about your height,
-        your beard, your love of beer and gold, and your rivalries
-        with elves. Your jokes are short and funny.
+        You are a Vegas stand-up comedian performing at a casino lounge.
+        You tell jokes about tourists, slot machines, poker faces,
+        and the glamorous chaos of Las Vegas. Your humor is sharp,
+        self-deprecating, and full of Vegas showmanship.
         """)
     String chat(@UserMessage String userMessage);
 }
@@ -680,9 +680,9 @@ public interface ChatAssistant {
 
         Here is the interface. It's a contract: we define what the AI does, not how. The "how" is handled by CDI and LangChain4j.
 
-        @SystemMessage defines the AI's behavior -- here a dwarf comedian who tells jokes. @UserMessage marks the user's parameter. @RegisterAIService tells CDI to create a bean for this interface.
+        @SystemMessage defines the AI's behavior -- here a Vegas stand-up comedian who tells jokes. @UserMessage marks the user's parameter. @RegisterAIService tells CDI to create a bean for this interface.
 
-        It's intentionally light and humorous to show that you can create ANY type of AI agent with this pattern.
+        It's intentionally light and humorous to show that you can create ANY type of AI agent with this pattern -- a Vegas comedian, a tech support bot, whatever you need.
     </aside>
 </section>
 
@@ -707,11 +707,11 @@ public class ChatResource {
     </code></pre>
     <p class="fragment accent medium">No LangChain4j dependency in your business code!</p>
     <aside class="notes">
-        And here is the REST endpoint. @Inject ChatAssistant, that's it.
+        And here's the REST endpoint. @Inject ChatAssistant -- that's the whole integration.
 
-        Note that the business code does NOT depend on LangChain4j. The import is just your interface. If tomorrow you switch AI frameworks, you change the implementation, not the business code.
+        Notice: the business code has ZERO dependency on LangChain4j. The only import is your own interface. Swap AI frameworks tomorrow? Change the implementation, not the business code.
 
-        This is the principle of inversion of control taken to the extreme.
+        This is inversion of control taken to its logical conclusion.
     </aside>
 </section>
 
@@ -755,7 +755,7 @@ public void chatStream(@QueryParam("message") String message,
 
         The user experience is much better: the user sees the response being built in real time instead of waiting 10 seconds to receive everything at once.
 
-        DEMO: show stream.html with a dwarf song displaying progressively.
+        DEMO: show stream.html with a Vegas show number displaying progressively.
     </aside>
 </section>
 
@@ -846,11 +846,11 @@ dev.langchain4j.cdi.plugin.vision-model.config.timeout=PT5M
     <div class="two-col" style="font-size: 0.85em;">
         <div class="box">
             <h3>💬 Classic chat</h3>
-            <p class="small">@RegisterAIService<br>+ @Inject<br>= Dwarf comedian 🧔🍺</p>
+            <p class="small">@RegisterAIService<br>+ @Inject<br>= Vegas comedian 🎰🎤</p>
         </div>
         <div class="box box-blue">
             <h3 style="color: var(--accent-blue);">🎬 Streaming</h3>
-            <p class="small">TokenStream<br>+ Server-Sent Events<br>= Live dwarf song 🎵</p>
+            <p class="small">TokenStream<br>+ Server-Sent Events<br>= Live Vegas show number 🎵</p>
         </div>
     </div>
     <div class="box" style="margin-top: 1em; font-size: 0.85em;">
@@ -864,16 +864,15 @@ dev.langchain4j.cdi.plugin.vision-model.config.timeout=PT5M
         All of this with CDI. No plumbing code. 🎉
     </p>
     <aside class="notes">
-        Quick recap of what we just showed.
+        Quick recap of what we just showed. Three patterns, all powered by CDI:
 
-        Three different patterns, all based on CDI:
-        1. Classic chat with @RegisterAIService and @Inject -- a dwarf telling jokes (basic pattern)
-        2. Streaming with TokenStream and SSE -- a dwarf song displaying progressively (better UX)
-        3. Vision with ImageContent -- for analyzing images with multimodal AI
+        1. Classic chat with @RegisterAIService and @Inject -- a Vegas comedian telling jokes (basic pattern)
+        2. Streaming with TokenStream and SSE -- a Vegas show number displaying progressively (better UX)
+        3. Vision with ImageContent -- analyzing images with multimodal AI
 
-        The dwarf theme is just to show that you can create ANY type of AI agent with this pattern. A technical assistant, a customer chatbot, a code generator, a tavern dwarf... it doesn't matter.
+        The Vegas theme is just to show you can create ANY type of AI agent with this pattern. A tech support bot, a customer chatbot, a code generator, a Vegas comedian... the pattern is the same.
 
-        What matters: in all three cases, CDI handles everything. No connection code, no manual configuration, no lifecycle management. You declare what you want, CDI injects it.
+        The real takeaway: in all three cases, CDI handles everything. No connection code, no manual config, no lifecycle management. You declare what you want, CDI injects it.
 
         And now that we've seen the basics, let's level up with advanced features: Memory, RAG, Tools, MCP.
     </aside>
@@ -893,7 +892,7 @@ dev.langchain4j.cdi.plugin.vision-model.config.timeout=PT5M
     </p>
     <p class="fragment accent-blue">Thankfully, we have <code>ChatMemory</code>!</p>
     <aside class="notes">
-        Quick transition. A stateless LLM is a bit limited. You need to add memory to have coherent conversations. Like us after the morning coffee.
+        Quick transition. A stateless LLM is like talking to someone with amnesia -- every message is a fresh start. You need memory for coherent conversations. Just like us before the morning coffee kicks in.
     </aside>
 </section>
 
@@ -964,13 +963,13 @@ public class KnowledgeBaseProvider {
     <aside class="notes">
         Emmanuel takes over.
 
-        RAG is what allows your AI to answer about YOUR data. Not the model's training data, but your internal documents, your knowledge base.
+        RAG is what lets your AI answer about YOUR data -- not the model's training data, but your internal docs, your knowledge base. This is where enterprise AI gets real.
 
         The pattern: add contentRetrieverName in @RegisterAIService, and provide a CDI producer @Named that creates the ContentRetriever.
 
         The producer creates an EmbeddingModel (here Ollama), an InMemoryEmbeddingStore, ingests documents, and returns an EmbeddingStoreContentRetriever.
 
-        For the store, it can be Qdrant, Chroma, pgvector, or even Infinispan if you're at Red Hat (wink at Emmanuel).
+        For the store, you've got options: Qdrant, Chroma, pgvector, or even Infinispan if you're in the Red Hat family (glance at Emmanuel).
     </aside>
 </section>
 
@@ -1003,11 +1002,11 @@ public class BookingTools {
         Tools are <strong>CDI beans</strong> → dependency injection in the tools! 🎉
     </p>
     <aside class="notes">
-        Tools are the killer feature. They allow the AI to call your business code.
+        Tools are THE killer feature. They let the AI call your actual business code -- not mock data, your real services.
 
-        And since Tools are CDI beans, they can themselves inject other services! BookingService, UserRepository, EmailSender... everything in your CDI container.
+        And since Tools are CDI beans, they can inject other services! BookingService, UserRepository, EmailSender... everything in your CDI container is fair game.
 
-        This is where langchain4j-cdi shines compared to the manual approach: your tools are managed, transactional, observable.
+        This is where langchain4j-cdi really shines over the manual approach: your tools are managed, transactional, observable. Enterprise-grade out of the box.
     </aside>
 </section>
 
@@ -1025,9 +1024,9 @@ public class BookingTools {
     </p>
     <p class="fragment accent-green">We need <strong>guardrails</strong>!</p>
     <aside class="notes">
-        We've all been there. It works in dev, and in prod it's chaos. LLMs are even worse because they are non-deterministic, depend on an external service, and cost tokens on every call.
+        We've all been there. Works in dev, chaos in prod. LLMs make it worse -- they're non-deterministic, depend on external services, and cost real money on every call.
 
-        Fortunately, MicroProfile has already solved these problems for microservices. We reuse the same patterns.
+        But here's the good news: MicroProfile already solved these exact problems for microservices. We just reuse the same battle-tested patterns.
     </aside>
 </section>
 
@@ -1053,16 +1052,16 @@ public interface ResilientAssistant {
 }
     </code></pre>
     <aside class="notes">
-        Emmanuel here.
+        Emmanuel here. This is the slide that makes ops teams happy.
 
-        Look at the beauty of CDI: MicroProfile Fault Tolerance annotations work directly on your AI Services. No specific code, no adapter.
+        Look at the beauty of CDI: MicroProfile Fault Tolerance annotations work directly on your AI Services. No glue code, no adapters.
 
-        @Retry: if the LLM times out or returns an error, we retry 3 times.
-        @Timeout: no more than 30 seconds of waiting.
-        @CircuitBreaker: after 5 calls with 50% failures, the circuit is cut.
-        @Fallback: a fallback message if everything fails.
+        @Retry: LLM times out or returns an error? Retry 3 times automatically.
+        @Timeout: cap at 30 seconds -- no runaway requests.
+        @CircuitBreaker: after 5 calls with 50% failures, cut the circuit. Protect your system.
+        @Fallback: graceful degradation when everything goes sideways.
 
-        All of this already exists in MicroProfile. We didn't invent anything. We just... injected it.
+        All of this already exists in MicroProfile. We didn't invent anything new. We just... injected it.
     </aside>
 </section>
 
@@ -1100,7 +1099,7 @@ public interface ResilientAssistant {
 &lt;/dependency&gt;
     </code></pre>
     <aside class="notes">
-        Telemetry is what lets you sleep at night.
+        Telemetry -- this is what lets you sleep at night when AI is running in production.
 
         The langchain4j-cdi-telemetry module integrates with MicroProfile Telemetry / OpenTelemetry. One Maven dependency and you're good to go.
 
@@ -1194,7 +1193,7 @@ podman run -p 3000:3000 -p 4317:4317 -p 4318:4318 \
         <p class="fragment">🛡️ Fault Tolerance via live coding!</p>
     </div>
     <aside class="notes">
-        Demo 2! A complete booking assistant.
+        Demo 2! This is where it all comes together -- a complete booking assistant with all the bells and whistles.
 
         DEMO CHECKLIST:
         1. cd demo-project/demo-2-ft-telemetry/base && mvn clean wildfly:dev
@@ -1298,7 +1297,7 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         Zero plumbing code -- everything goes through properties 🌍
     </p>
     <aside class="notes">
-        MCP -- Model Context Protocol -- is the open standard for connecting AI agents to external tools. Think of it as JDBC but for AI.
+        MCP -- Model Context Protocol -- is the open standard for connecting AI agents to external tools. Think of it as JDBC for AI. One protocol, any tool server.
 
         The important thing here is the toolProviderName in @RegisterAIService. It's what links the agent to the McpToolProvider.
 
@@ -1324,19 +1323,19 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
     <p class="demo-banner">🎬 DEMO 3</p>
     <h2>421 dice game with MCP on WildFly</h2>
     <div style="font-size: 0.85em; text-align: left; max-width: 700px; margin: 0 auto;">
-        <p>🎲 <strong>Gunther Barrique-d'Or</strong>, the dwarf tavern keeper who runs the 421 game</p>
+        <p>🎲 <strong>Lucky Jack Diamond</strong>, the Vegas dealer who runs the 421 game</p>
         <p class="fragment">✅ External <span class="accent">MCP Server HTTP SSE</span> for dice rolls</p>
         <p class="fragment">✅ AI agent with <span class="accent-blue">@RegisterAIService</span> + McpToolProvider</p>
         <p class="fragment">✅ Configuration via <span class="accent-green">WildFly AI subsystem</span></p>
         <p class="fragment">✅ Everything configured in <code>standalone.xml</code></p>
     </div>
     <p class="fragment medium accent" style="margin-top: 1em;">
-        By my beard! 421 on WildFly! 🐝🍺
+        Jackpot! 421 on WildFly! 🐝🎰
     </p>
     <aside class="notes">
         Demo 3: the 421 dice game with MCP on WildFly!
 
-        This demo illustrates how to use the MCP protocol to connect an AI agent to an external dice-rolling server via HTTP SSE (Server-Sent Events).
+        This demo shows how MCP connects an AI agent to an external dice-rolling server via HTTP SSE (Server-Sent Events). It's the real deal -- protocol-level tool integration.
 
         KEY POINT: Configuration via the WildFly AI subsystem
 
@@ -1348,17 +1347,17 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         DEMO CHECKLIST:
         1. Show standalone.xml - AI subsystem with ollama-chat-model
         2. Show standalone.xml - mcp-client-sse with socket-binding mcp-sse (localhost:8090)
-        3. Show DwarfGameMaster.java with @RegisterAIService(chatModelName="ollama", toolProviderName="mcp")
+        3. Show CasinoDealerAI.java with @RegisterAIService(chatModelName="ollama", toolProviderName="mcp")
         4. Start the MCP HTTP SSE server on port 8090
         5. Build the application: mvn clean install
         6. Start provisioned WildFly: ./target/server/bin/standalone.sh
-        7. Open the tavern UI at http://localhost:8080/demo-3/
-        8. Play a round of 421: "Roll the dice" -> Gunther uses roll_multiple via MCP SSE
+        7. Open the casino UI at http://localhost:8080/demo-3/
+        8. Play a round of 421: "Roll the dice" -> Lucky Jack uses roll_multiple via MCP SSE
         9. Show WildFly logs with MCP tool calls
 
         421: each player rolls 3 dice, best combination wins (421 > Three of a kind > Straight > Pair > Nothing)
 
-        If it crashes: "By my beard, the tavern keeper had too much ale!"
+        If it crashes: "Looks like Lady Luck left the building!"
     </aside>
 </section>
 
@@ -1432,7 +1431,7 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
                 <strong>1. Player</strong>: "Roll the dice"
             </div>
             <div class="step blue">
-                <strong>2. JAX-RS endpoint</strong> → <code>DwarfGameMaster.play()</code>
+                <strong>2. JAX-RS endpoint</strong> → <code>CasinoDealerAI.play()</code>
             </div>
             <div class="step green">
                 <strong>3. LLM (Ollama)</strong> via WildFly AI subsystem → decides to use <code>roll_multiple(count=3, sides=6)</code>
@@ -1447,7 +1446,7 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
                 <strong>6. LLM</strong> analyzes the result → identifies "421" → responds to the player
             </div>
             <div class="step green">
-                <strong>7. Gunther</strong>: "BY MY BEARD! A perfect 421! 🎲🎉"
+                <strong>7. Lucky Jack</strong>: "JACKPOT! A perfect 421! 🎲🎉"
             </div>
         </div>
     </div>
@@ -1455,9 +1454,9 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         The MCP server is accessible via socket-binding configured in standalone.xml 🔧
     </p>
     <aside class="notes">
-        Here is the complete flow of a dice roll in demo 3.
+        Here is the complete flow of a dice roll in demo 3. Walk through it step by step -- this is the money slide for understanding MCP.
 
-        The user clicks "Roll the dice" in the web interface. The JAX-RS endpoint injects DwarfGameMaster (the AI agent) and calls its play() method.
+        The user clicks "Roll the dice" in the web UI. The JAX-RS endpoint injects CasinoDealerAI (the AI agent) and calls its play() method.
 
         The agent uses the "ollama" chat model configured in the WildFly AI subsystem. The LLM understands it needs to roll 3 six-sided dice, so it decides to call the roll_multiple tool with parameters count=3 and sides=6.
 
@@ -1467,11 +1466,11 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
 
         The MCP server actually rolls 3 dice (random), calculates the total, and returns the result in JSON format via the SSE stream.
 
-        The McpToolProvider returns the result to the LLM. The LLM analyzes the dice [4, 2, 1], identifies the "421" combination (the best in the game!), and generates a humorous response in the style of Gunther the dwarf tavern keeper.
+        The McpToolProvider returns the result to the LLM. The LLM analyzes the dice [4, 2, 1], identifies the "421" combination (the best in the game!), and generates a humorous response in the style of Lucky Jack the Vegas dealer.
 
-        The response flows back up to the browser, and Gunther announces: "BY MY BEARD! A perfect 421!"
+        The response flows back up to the browser, and Lucky Jack announces: "JACKPOT! A perfect 421!"
 
-        The key point: everything is configured in standalone.xml via the WildFly AI subsystem. This is a real native WildFly integration, not just external properties.
+        The key takeaway: everything is configured in standalone.xml via the WildFly AI subsystem. This is real, native WildFly integration -- not just external properties.
     </aside>
 </section>
 
@@ -1499,13 +1498,13 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         <em>"If we have time left, we can cover A2A"</em> -- it's now 😄
     </p>
     <aside class="notes">
-        If we have time, let's talk about the future.
+        If we have time, let's peek into the future.
 
-        A2A -- Agent-to-Agent -- is the next standard after MCP. MCP connects an agent to tools. A2A connects agents to each other.
+        A2A -- Agent-to-Agent -- is the next standard after MCP. MCP connects agents to tools. A2A connects agents to each other.
 
-        Imagine: a Jakarta EE agent that handles bookings, another that manages inventory, a third one that handles customer support. They communicate with each other, delegate tasks, and each runs on its own server.
+        Picture this: a Jakarta EE agent handling bookings, another managing inventory, a third on customer support. They talk to each other, delegate tasks, each running on its own server. It's microservices, but for AI agents.
 
-        It's still under development, but langchain4j-cdi will be ready. Because CDI is built for this: communication between components.
+        It's still under development, but langchain4j-cdi will be ready. CDI was literally built for this: managed communication between components.
     </aside>
 </section>
 
@@ -1521,11 +1520,11 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         <p class="fragment">🐝 Compatible with <strong>all</strong> CDI servers</p>
     </div>
     <aside class="notes">
-        Quick recap of what we saw.
+        Quick recap -- hit the key points fast.
 
-        The key message: you don't need to change your stack to do AI. Your Jakarta EE server, your CDI patterns, your MicroProfile tools -- all of that works with AI now.
+        The message to take home: you do NOT need to change your stack to do AI. Your Jakarta EE server, your CDI patterns, your MicroProfile tools -- they all work with AI now.
 
-        langchain4j-cdi is the bridge between the enterprise Java world and the generative AI world.
+        langchain4j-cdi is the bridge between the enterprise Java world and the generative AI world. No migration required.
     </aside>
 </section>
 
@@ -1544,11 +1543,11 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         <p class="medium">Thanks also to <span class="accent-green">Buhake Sindi</span>, co-creator 🙏</p>
     </div>
     <aside class="notes">
-        The project is open source, we are looking for contributors!
+        The project is open source and we're actively looking for contributors!
 
-        Even if you have never contributed to an open source project, this is the opportunity. Issues, PRs, or even just a GitHub star. It makes us happy and helps visibility.
+        Even if you've never contributed to open source before, this is a great place to start. Issues, PRs, or just a GitHub star -- it all helps with visibility and keeps us motivated.
 
-        Thanks to Buhake Sindi, our third co-creator.
+        Shout-out to Buhake Sindi, our third co-creator.
     </aside>
 </section>
 
@@ -1564,11 +1563,11 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         And with CDI, AI is just one more <code>@Inject</code>. 😉
     </p>
     <aside class="notes">
-        Questions slide! We are open to all questions.
+        Q&A time! We're open to anything.
 
-        If someone asks THE question about AI replacing developers, we have the answer ready.
+        If someone asks THE question about AI replacing developers, we've got the answer loaded and ready.
 
-        Otherwise, we can also talk about CDI, WildFly, the future of Jakarta EE, or why conference buffets are always so good.
+        Otherwise, happy to talk CDI, WildFly, Jakarta EE roadmap, or debate why conference Wi-Fi never works during live demos.
     </aside>
 </section>
 
@@ -1595,11 +1594,11 @@ dev.langchain4j.cdi.plugin.mcp-tools.config.url=\
         Slides: Reveal.js | Demos: WildFly + IntelliJ
     </p>
     <aside class="notes">
-        Thank you all for staying! Don't hesitate to come talk to us afterwards.
+        Thank you all for sticking with us! Come find us afterwards -- we love talking about this stuff.
 
-        The slides and demo code will be available on GitHub.
+        Slides and all demo code will be up on GitHub.
 
-        And don't forget to star the langchain4j-cdi repo! 😄
+        And if you enjoyed the session, drop us a star on the langchain4j-cdi repo. It takes two seconds and makes our day.
     </aside>
 </section>
 

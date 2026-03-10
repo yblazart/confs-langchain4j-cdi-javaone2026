@@ -4,7 +4,7 @@ Standalone MCP (Model Context Protocol) server for dice rolling.
 
 ## Description
 
-This server exposes 5 dice rolling tools via the MCP protocol over stdio (JSON-RPC 2.0). It is used by the `DwarfGameMaster` to manage game mechanics (dice rolls, skill checks, etc.).
+This server exposes 5 dice rolling tools via the MCP protocol over stdio (JSON-RPC 2.0). It is used by the `CasinoDealerAI` to manage game mechanics (dice rolls, skill checks, etc.).
 
 ## Available Tools
 
@@ -19,7 +19,7 @@ This server exposes 5 dice rolling tools via the MCP protocol over stdio (JSON-R
 ## Build
 
 ```bash
-cd demo-4-dwarf-dice/mcp-server
+cd demo-4-casino-dice/mcp-server
 mvn clean package
 ```
 
@@ -87,7 +87,7 @@ The server implements MCP protocol version `2024-11-05`:
 |  WildFly (solution)  |
 |                      |
 |  +----------------+  |
-|  | DwarfGameMaster |  |  LLM decides to roll
+|  | CasinoDealerAI  |  |  LLM decides to roll
 |  +-------+--------+  |  a die (tool calling)
 |          |           |
 |  +-------v--------+  |

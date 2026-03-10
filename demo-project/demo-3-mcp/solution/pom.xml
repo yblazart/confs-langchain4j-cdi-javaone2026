@@ -14,7 +14,7 @@
     <artifactId>demo-3-mcp-solution</artifactId>
     <packaging>war</packaging>
     <name>LangChain4j-CDI Demo 3 Solution (Complete)</name>
-    <description>Complete solution WAR module for Dwarf Dice RPG game demo</description>
+    <description>Complete solution WAR module for Casino Dice game demo</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>

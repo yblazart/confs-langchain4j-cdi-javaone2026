@@ -6,18 +6,18 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * TODO: REST endpoint for playing 421 in the dwarf tavern.
+ * TODO: REST endpoint for playing 421 in the Vegas casino.
  *
  * To complete:
- * 1. Inject the DwarfGameMaster
+ * 1. Inject the CasinoDealerAI
  * 2. Implement the play() method that calls the agent
  */
 @Path("/game")
 @ApplicationScoped
 public class GameResource {
 
-    // TODO: Inject the DwarfGameMaster with @Inject
-    // DwarfGameMaster gameMaster;
+    // TODO: Inject the CasinoDealerAI with @Inject
+    // CasinoDealerAI gameMaster;
 
     /**
      * TODO: Play an action in the 421 game.
@@ -32,7 +32,7 @@ public class GameResource {
     }
 
     /**
-     * Enter the tavern and start a game.
+     * Enter the casino and start a game.
      */
     @GET
     @Path("/start")
@@ -49,6 +49,6 @@ public class GameResource {
     @Path("/health")
     @Produces(MediaType.TEXT_PLAIN)
     public String health() {
-        return "The Golden Pickaxe Tavern OK - Gunther is ready for a game of 421!";
+        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of 421!";
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo 3 — The Golden Pickaxe Tavern - 421 Dice Game</title>
+    <title>Demo 3 — The Golden Ace Casino - 421 Dice Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -111,7 +111,7 @@
 </head>
 <body>
     <header>
-        <h1>Demo 3 — The Golden Pickaxe Tavern</h1>
+        <h1>Demo 3 — The Golden Ace Casino</h1>
         <span class="badge">SOLUTION</span>
         <span class="subtitle">421 Dice Game with MCP Dice Server</span>
     </header>
@@ -119,13 +119,13 @@
     <div class="hints">
         <strong>MCP Dice Tools:</strong> roll_multiple (3d6) |
         <strong>Transport:</strong> stdio (JSON-RPC 2.0) |
-        <strong>Tavern Keeper:</strong> Gunther Barrique-d'Or, master of 421
+        <strong>Dealer:</strong> Lucky Jack Diamond, master of 421
     </div>
 
     <div id="chat">
         <div class="welcome">
-            <h2>The Golden Pickaxe</h2>
-            <p>Welcome to <code>Gunther Barrique-d'Or</code>'s tavern!</p>
+            <h2>The Golden Ace</h2>
+            <p>Welcome to <code>Lucky Jack Diamond</code>'s casino!</p>
             <p>Master dice roller - Every roll is visible in real time</p>
             <p>The AI rolls dice via MCP and displays results clearly</p>
             <br>
@@ -135,7 +135,7 @@
             <br>
             <p>Commands:</p>
             <p><strong>For you:</strong> "Roll the dice" | "My turn" | "I roll"</p>
-            <p><strong>For Gunther:</strong> "Your turn" | "Roll for yourself"</p>
+            <p><strong>For Lucky Jack:</strong> "Your turn" | "Roll for yourself"</p>
         </div>
     </div>
 
@@ -222,7 +222,7 @@
                 if (!welcomed) {
                     document.querySelector('.welcome')?.remove();
                     welcomed = true;
-                    appendMsg("Entering the tavern...", 'narrator');
+                    appendMsg("Entering the casino...", 'narrator');
                     sending = true;
                     document.getElementById('send-btn').classList.add('loading');
 
