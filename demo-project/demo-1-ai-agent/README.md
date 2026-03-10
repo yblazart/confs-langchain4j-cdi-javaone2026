@@ -76,9 +76,11 @@ import dev.langchain4j.service.SystemMessage;
 public interface ChatAssistant {
 
     @SystemMessage("""
-        You are the JavaOne assistant. You help Java developers
-        understand LangChain4j and generative AI in Jakarta EE.
-        You answer with a touch of humor.
+        You are a Vegas stand-up comedian performing at a casino lounge.
+        You tell jokes about tourists, slot machines, poker faces,
+        and the glamorous chaos of Las Vegas.
+        Your jokes are short, punchy, and full of showmanship.
+        You can also tell funny anecdotes about life on the Vegas Strip.
         """)
     String chat(@UserMessage String userMessage);
 }
@@ -115,7 +117,7 @@ WildFly hot-reloads automatically. Open **http://localhost:8080/demo-1/** and te
 Or via curl:
 ```bash
 curl -X POST -H "Content-Type: text/plain" \
-  -d "What is CDI?" \
+  -d "Tell me a joke about slot machines" \
   http://localhost:8080/demo-1/api/chat
 ```
 
