@@ -58,14 +58,14 @@
             <artifactId>langchain4j-cdi-telemetry</artifactId>
         </dependency>
 
-        <!-- LangChain4j Core + Ollama -->
+        <!-- LangChain4j Core + Mistral AI -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama</artifactId>
+            <artifactId>langchain4j-mistral-ai</artifactId>
         </dependency>
     </dependencies>
 

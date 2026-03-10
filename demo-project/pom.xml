@@ -30,9 +30,8 @@
         <langchain4j-cdi.version>1.0.0</langchain4j-cdi.version>
         <wildfly.version>39.0.0.Final</wildfly.version>
 
-        <!-- Ollama (local LLM) -->
-        <ollama.base-url>http://localhost:11434</ollama.base-url>
-        <ollama.model>ministral-3:3b</ollama.model>
+        <!-- Mistral AI -->
+        <mistral.model>mistral-small-latest</mistral.model>
     </properties>
 
     <dependencyManagement>
@@ -81,7 +80,7 @@
                 <version>${langchain4j-cdi.version}</version>
             </dependency>
 
-            <!-- LangChain4j core + Ollama (1.11.0) -->
+            <!-- LangChain4j core + Mistral AI -->
             <dependency>
                 <groupId>dev.langchain4j</groupId>
                 <artifactId>langchain4j</artifactId>
@@ -89,7 +88,7 @@
             </dependency>
             <dependency>
                 <groupId>dev.langchain4j</groupId>
-                <artifactId>langchain4j-ollama</artifactId>
+                <artifactId>langchain4j-mistral-ai</artifactId>
                 <version>${langchain4j.version}</version>
             </dependency>
             <dependency>

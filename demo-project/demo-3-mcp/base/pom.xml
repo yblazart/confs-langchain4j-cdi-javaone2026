@@ -46,14 +46,14 @@
             <artifactId>langchain4j-cdi-config</artifactId>
         </dependency>
 
-        <!-- LangChain4j Core and Ollama -->
+        <!-- LangChain4j Core and Mistral AI -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama</artifactId>
+            <artifactId>langchain4j-mistral-ai</artifactId>
         </dependency>
 
         <!-- JSON processing -->

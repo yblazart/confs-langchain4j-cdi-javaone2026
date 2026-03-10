@@ -14,7 +14,7 @@
     <artifactId>demo-1-ai-agent</artifactId>
     <packaging>pom</packaging>
     <name>LangChain4j-CDI Demo 1 - AI Agent</name>
-    <description>Simple injectable AI agent using @RegisterAIService on WildFly with Ollama</description>
+    <description>Simple injectable AI agent using @RegisterAIService on WildFly with Mistral AI</description>
 
     <modules>
         <module>base</module>

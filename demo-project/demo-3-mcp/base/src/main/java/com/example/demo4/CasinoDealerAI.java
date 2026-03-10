@@ -9,7 +9,7 @@ package com.example.demo4;
  * TODO: AI agent that hosts a 421 dice game in a Vegas casino.
  *
  * To complete:
- * 1. Annotate with @RegisterAIService(chatModelName = "ollama", toolProviderName = "mcp")
+ * 1. Annotate with @RegisterAIService(chatModelName = "mistral", toolProviderName = "mcp")
  * 2. Define the play() method with @SystemMessage and @UserMessage
  * 3. The @SystemMessage must describe the casino dealer's role and the 421 rules
  */

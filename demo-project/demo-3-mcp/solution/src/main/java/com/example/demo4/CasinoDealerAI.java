@@ -14,7 +14,7 @@ import dev.langchain4j.service.UserMessage;
  * The agent uses these tools to manage dice rolls during the game
  * and bring the casino atmosphere to life.
  */
-@RegisterAIService(chatModelName = "ollama", toolProviderName = "mcp")
+@RegisterAIService(chatModelName = "mistral", toolProviderName = "mcp")
 public interface CasinoDealerAI {
 
     @SystemMessage("""

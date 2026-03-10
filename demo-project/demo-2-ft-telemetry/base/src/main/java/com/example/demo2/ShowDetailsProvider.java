@@ -3,7 +3,7 @@ package com.example.demo2;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.model.ollama.OllamaEmbeddingModel;
+import dev.langchain4j.model.mistralai.MistralAiEmbeddingModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
@@ -27,9 +27,9 @@ public class ShowDetailsProvider {
     @Named("my-rag")
     @ApplicationScoped
     public ContentRetriever contentRetriever() {
-        OllamaEmbeddingModel embeddingModel = OllamaEmbeddingModel.builder()
-                .baseUrl("http://localhost:11434")
-                .modelName("qwen2.5:7b")
+        MistralAiEmbeddingModel embeddingModel = MistralAiEmbeddingModel.builder()
+                .apiKey(System.getenv("MISTRAL_API_KEY"))
+                .modelName("mistral-embed")
                 .build();
 
         InMemoryEmbeddingStore<TextSegment> store = new InMemoryEmbeddingStore<>();
