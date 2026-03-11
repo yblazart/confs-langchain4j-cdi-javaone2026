@@ -32,6 +32,9 @@
 
         <!-- Mistral AI -->
         <mistral.model>mistral-small-latest</mistral.model>
+
+        <!-- LangChain4j MCP (beta versioning) -->
+        <langchain4j-mcp.version>1.11.0-beta19</langchain4j-mcp.version>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +98,11 @@
                 <groupId>dev.langchain4j</groupId>
                 <artifactId>langchain4j-open-ai</artifactId>
                 <version>${langchain4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-mcp</artifactId>
+                <version>${langchain4j-mcp.version}</version>
             </dependency>
 
             <!-- JSON processing -->

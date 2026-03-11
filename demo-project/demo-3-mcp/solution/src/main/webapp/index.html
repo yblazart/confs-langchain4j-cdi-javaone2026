@@ -148,6 +148,55 @@
             flex-shrink: 0;
         }
         .hints strong { color: #d4af37; }
+
+        /* Dice faces */
+        .dice-row {
+            display: flex; gap: 1rem; align-items: center;
+            margin: 0.8rem 0; justify-content: center;
+        }
+        .die {
+            width: 64px; height: 64px;
+            background: linear-gradient(145deg, #f5f0e1, #e8e0cc);
+            border-radius: 10px; display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            padding: 10px;
+            box-shadow:
+                2px 3px 6px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.4);
+            animation: diceRoll 0.4s ease-out;
+        }
+        .die .pip {
+            width: 10px; height: 10px;
+            background: radial-gradient(circle, #2a1a3e, #1a0a2e);
+            border-radius: 50%;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+        }
+        /* Grid placement helpers: each pip gets a grid area */
+        .die .p-tl { grid-area: 1/1; align-self: start; justify-self: start; }
+        .die .p-tc { grid-area: 1/2; align-self: start; justify-self: center; }
+        .die .p-tr { grid-area: 1/3; align-self: start; justify-self: end; }
+        .die .p-ml { grid-area: 2/1; align-self: center; justify-self: start; }
+        .die .p-mc { grid-area: 2/2; align-self: center; justify-self: center; }
+        .die .p-mr { grid-area: 2/3; align-self: center; justify-self: end; }
+        .die .p-bl { grid-area: 3/1; align-self: end; justify-self: start; }
+        .die .p-bc { grid-area: 3/2; align-self: end; justify-self: center; }
+        .die .p-br { grid-area: 3/3; align-self: end; justify-self: end; }
+
+        .dice-total {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem; font-weight: 700;
+            background: linear-gradient(135deg, #d4af37, #f5d77a);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes diceRoll {
+            0% { transform: rotate(-15deg) scale(0.5); opacity: 0; }
+            50% { transform: rotate(8deg) scale(1.1); }
+            100% { transform: rotate(0deg) scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -159,7 +208,7 @@
 
     <div class="hints">
         <strong>MCP Dice Tools:</strong> roll (2d6) |
-        <strong>Transport:</strong> stdio (JSON-RPC 2.0) |
+        <strong>Transport:</strong> SSE (JSON-RPC 2.0) |
         <strong>Dealer:</strong> Lucky Jack Diamond, Craps master
     </div>
 
@@ -191,14 +240,77 @@
         let welcomed = false;
         let sending = false;
 
+        const DICE_PIPS = {
+            1: ['p-mc'],
+            2: ['p-tr', 'p-bl'],
+            3: ['p-tr', 'p-mc', 'p-bl'],
+            4: ['p-tl', 'p-tr', 'p-bl', 'p-br'],
+            5: ['p-tl', 'p-tr', 'p-mc', 'p-bl', 'p-br'],
+            6: ['p-tl', 'p-ml', 'p-bl', 'p-tr', 'p-mr', 'p-br']
+        };
+
+        function createDie(value) {
+            const die = document.createElement('div');
+            die.className = 'die';
+            (DICE_PIPS[value] || []).forEach(pos => {
+                const pip = document.createElement('div');
+                pip.className = 'pip ' + pos;
+                die.appendChild(pip);
+            });
+            return die;
+        }
+
+        function renderBotMessage(text) {
+            const frag = document.createDocumentFragment();
+            const diceMatch = text.match(/DICE:\s*\[([^\]]+)\]/i);
+
+            if (diceMatch) {
+                const values = diceMatch[1].split(',').map(v => parseInt(v.trim())).filter(v => v >= 1 && v <= 6);
+                if (values.length > 0) {
+                    // Text before DICE line
+                    const beforeDice = text.substring(0, text.indexOf(diceMatch[0])).trim();
+                    if (beforeDice) {
+                        const pre = document.createElement('pre');
+                        pre.textContent = beforeDice;
+                        frag.appendChild(pre);
+                    }
+
+                    // Dice row with visual dice + total
+                    const row = document.createElement('div');
+                    row.className = 'dice-row';
+                    values.forEach(v => row.appendChild(createDie(v)));
+                    const total = values.reduce((a, b) => a + b, 0);
+                    const totalSpan = document.createElement('span');
+                    totalSpan.className = 'dice-total';
+                    totalSpan.textContent = '= ' + total;
+                    row.appendChild(totalSpan);
+                    frag.appendChild(row);
+
+                    // Remaining text (skip DICE and TOTAL lines, keep RESULT and rest)
+                    const afterDice = text.substring(text.indexOf(diceMatch[0]) + diceMatch[0].length);
+                    const remaining = afterDice.replace(/^\s*\n?\s*TOTAL:\s*\[?\d+\]?\s*/i, '').trim();
+                    if (remaining) {
+                        const pre = document.createElement('pre');
+                        pre.textContent = remaining;
+                        frag.appendChild(pre);
+                    }
+                    return frag;
+                }
+            }
+
+            // Fallback: plain text
+            const pre = document.createElement('pre');
+            pre.textContent = text;
+            frag.appendChild(pre);
+            return frag;
+        }
+
         function appendMsg(text, cls) {
             const chat = document.getElementById('chat');
             const div = document.createElement('div');
             div.className = 'msg ' + cls;
             if (cls === 'bot') {
-                const pre = document.createElement('pre');
-                pre.textContent = text;
-                div.appendChild(pre);
+                div.appendChild(renderBotMessage(text));
             } else {
                 div.textContent = text;
             }

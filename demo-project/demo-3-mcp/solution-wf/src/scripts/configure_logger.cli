@@ -1,6 +1,6 @@
 /subsystem=logging/logger=dev.langchain4j.cdi:add(level=TRACE)
 /subsystem=logging/logger=dev.langchain4j.mcp.client:add(level=TRACE)
-/subsystem=logging/logger=dev.langchain4j.model.mistralai:add(level=TRACE)
+/subsystem=logging/logger=dev.langchain4j.model.ollama:add(level=TRACE)
 /subsystem=logging/logger=dev.langchain4j.service:add(level=TRACE)
 /subsystem=logging/logger=dev.langchain4j.model.openai:add(level=TRACE)
 /subsystem=logging/logger=org.wildfly.extension.ai:add(level=TRACE)
