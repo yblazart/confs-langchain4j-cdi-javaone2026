@@ -6,7 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * REST endpoint for playing 421 in the Vegas casino.
+ * REST endpoint for playing Craps in the Vegas casino.
  *
  * This endpoint exposes the AI agent that hosts the dice game
  * and uses MCP tools to manage dice rolls.
@@ -19,7 +19,7 @@ public class GameResource {
     CasinoDealerAI gameMaster;
 
     /**
-     * Play an action in the 421 game.
+     * Play an action in the Craps game.
      *
      * Usage example:
      * POST /api/game/play
@@ -28,10 +28,9 @@ public class GameResource {
      * Roll the dice
      *
      * The dealer will:
-     * 1. Roll 3d6 for the player via MCP
-     * 2. Announce the combination
-     * 3. Roll 3d6 for himself
-     * 4. Compare and announce the winner
+     * 1. Roll 2d6 for the shooter via MCP
+     * 2. Announce the result (natural, craps, or point)
+     * 3. Track the point across rolls in the same round
      */
     @POST
     @Path("/play")
@@ -48,7 +47,7 @@ public class GameResource {
     @Path("/start")
     @Produces(MediaType.TEXT_PLAIN)
     public String start() {
-        return gameMaster.play("Hello! I'm here to play 421.");
+        return gameMaster.play("Hello! I'm here to play Craps.");
     }
 
     /**
@@ -58,6 +57,6 @@ public class GameResource {
     @Path("/health")
     @Produces(MediaType.TEXT_PLAIN)
     public String health() {
-        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of 421!";
+        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of Craps!";
     }
 }

@@ -6,7 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * TODO: REST endpoint for playing 421 in the Vegas casino.
+ * TODO: REST endpoint for playing Craps in the Vegas casino.
  *
  * To complete:
  * 1. Inject the CasinoDealerAI
@@ -20,7 +20,7 @@ public class GameResource {
     // CasinoDealerAI gameMaster;
 
     /**
-     * TODO: Play an action in the 421 game.
+     * TODO: Play an action in the Craps game.
      */
     @POST
     @Path("/play")
@@ -38,7 +38,7 @@ public class GameResource {
     @Path("/start")
     @Produces(MediaType.TEXT_PLAIN)
     public String start() {
-        // TODO: Return gameMaster.play("Hello! I'm here to play 421.")
+        // TODO: Return gameMaster.play("Hello! I'm here to play Craps.")
         throw new UnsupportedOperationException("TODO: To implement during live coding");
     }
 
@@ -49,6 +49,6 @@ public class GameResource {
     @Path("/health")
     @Produces(MediaType.TEXT_PLAIN)
     public String health() {
-        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of 421!";
+        return "The Golden Ace Casino OK - Lucky Jack is ready for a game of Craps!";
     }
 }

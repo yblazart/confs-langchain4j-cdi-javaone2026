@@ -20,7 +20,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
-        <version.wildfly.server>39.0.0.Final</version.wildfly.server>
+        <version.wildfly.server>39.0.1.Final</version.wildfly.server>
     </properties>
     
     <dependencies>

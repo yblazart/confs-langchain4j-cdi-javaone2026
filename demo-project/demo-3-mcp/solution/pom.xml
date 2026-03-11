@@ -21,9 +21,10 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
-        <version.wildfly.server>39.0.0.Final</version.wildfly.server>
+        <version.wildfly.server>39.0.1.Final</version.wildfly.server>
         <version.compiler.plugin>3.13.0</version.compiler.plugin>
         <version.war.plugin>3.4.0</version.war.plugin>
+        <version.wildfly.maven.plugin>5.1.5.Final</version.wildfly.maven.plugin>
     </properties>
 
     <dependencies>
@@ -83,6 +84,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
                 <configuration>
                     <discoverProvisioningInfo>
                         <spaces>
