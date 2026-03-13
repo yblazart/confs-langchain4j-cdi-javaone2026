@@ -76,9 +76,6 @@
                         <version>${version.wildfly.server}</version>
                     </discoverProvisioningInfo>
                     <name>ROOT.war</name>
-                    <extraServerContentDirs>
-                        <extraServerContentDir>src/wasm</extraServerContentDir>
-                    </extraServerContentDirs>
                     <packagingScripts>
                         <packaging-script>
                             <scripts>

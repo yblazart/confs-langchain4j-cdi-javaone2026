@@ -4,4 +4,3 @@
 /subsystem=logging/logger=org.wildfly.extension.mcp.injection:add(level=DEBUG)
 /subsystem=logging/logger=org.wildfly.extension.mcp:add(level=DEBUG)
 /subsystem=logging/logger=io.undertow:add(level=TRACE)
-/subsystem=wasm/wasm-tool=dice:add(path="roll-dice.wasm", relative-to="jboss.server.data.dir")
