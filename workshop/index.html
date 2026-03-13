@@ -913,9 +913,11 @@ curl -X POST -H "Content-Type: text/plain" \
     <div class="compare-box">
         <h4 style="color: var(--accent-red);">Without CDI (verbose)</h4>
         <pre><code>ChatLanguageModel model =
-  OpenAiChatModel.builder()
-    .apiKey(System.getenv("KEY"))
-    .modelName("gpt-4o")
+  MistralAiChatModel.builder()
+    .apiKey(System.getenv("MISTRAL_API_KEY"))
+    .modelName("pixtral-large-latest")
+    .temperature(0.3)
+    .maxTokens(1000)
     .build();
 
 ChatMemory memory =
