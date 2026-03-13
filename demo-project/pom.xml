@@ -26,8 +26,8 @@
         <!-- Versions -->
         <jakartaee.version>10.0.0</jakartaee.version>
         <microprofile.version>6.1</microprofile.version>
-        <langchain4j.version>1.11.0</langchain4j.version>
-        <langchain4j-cdi.version>1.0.0</langchain4j-cdi.version>
+        <langchain4j.version>1.12.2</langchain4j.version>
+        <langchain4j-cdi.version>1.1.0</langchain4j-cdi.version>
         <wildfly.version>39.0.0.Final</wildfly.version>
 
         <!-- Mistral AI -->
