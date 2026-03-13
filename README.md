@@ -1,5 +1,37 @@
 # LangChain4j-CDI — JavaOne 2026
 
+## Prerequisites
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **Java** | 21+ | Build & run demos |
+| **Maven** | 3.8+ | Build system |
+| **Python 3** | 3.x | Serve slides & workshop locally |
+| **Ollama** | latest | Local LLM inference |
+
+### Install Python 3
+
+**macOS** (Homebrew):
+```bash
+brew install python3
+```
+
+**Linux** (Debian/Ubuntu):
+```bash
+sudo apt update && sudo apt install python3
+```
+
+**Windows**:
+
+Download from https://www.python.org/downloads/ and run the installer. Make sure to check **"Add Python to PATH"** during installation.
+
+### Install Ollama
+
+Download from https://ollama.com and pull the required models:
+```bash
+ollama pull mistral-small3.1
+```
+
 ## Launch the slides
 
 ```bash
@@ -27,12 +59,34 @@ Open http://localhost:8000 in the browser.
 | `B` / `.` | Black screen (pause) |
 | `←` `→` | Navigation |
 
+## Workshop
+
+A self-paced hands-on guide covering all 3 demos step by step.
+
+```bash
+cd workshop
+chmod +x start.sh
+./start.sh
+```
+
+Windows:
+```cmd
+cd workshop
+start.bat
+```
+
+Open http://localhost:8001 in the browser.
+
 ## Structure
 
 ```
 slides/          → Reveal.js Presentation
   index.html     → Slides + speaker notes
   start.sh       → Launch script
+workshop/        → Hands-on workshop guide
+  index.html     → Self-paced tutorial
+  start.sh       → Launch script (macOS/Linux)
+  start.bat      → Launch script (Windows)
 demo-project/    → Maven project for IntelliJ demos
 ```
 

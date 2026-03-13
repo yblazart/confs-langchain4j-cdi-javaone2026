@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/yblazart/projects/perso/confs/javaone/confs-langchain4j-cdi-javaone2026/workshop/start.sh)"
+    ]
+  }
+}
