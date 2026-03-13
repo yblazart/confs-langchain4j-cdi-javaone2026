@@ -62,19 +62,22 @@
     </dependencies>
 
     <build>
+        <finalName>demo-1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
                 <configuration>
-                    <finalName>demo-1</finalName>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <configuration>
-                    <name>demo-1.war</name>
+                    <name>${project.build.finalName}.war</name>
+                    <filename>${project.build.finalName}.war</filename>
                     <packagingScripts>
                         <packaging-script>
                             <scripts>

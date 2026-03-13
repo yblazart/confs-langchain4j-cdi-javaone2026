@@ -14,7 +14,7 @@
 
     <artifactId>demo-2-ft-telemetry</artifactId>
     <packaging>pom</packaging>
-    <name>Demo 2: Fault Tolerance + Telemetry (Aggregator)</name>
+    <name>LangChain4j-CDI Demo 2 Fault Tolerance + Telemetry (Aggregator)</name>
 
     <modules>
         <module>base</module>

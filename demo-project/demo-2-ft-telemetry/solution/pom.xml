@@ -14,7 +14,7 @@
 
     <artifactId>demo-2-ft-telemetry-solution</artifactId>
     <packaging>war</packaging>
-    <name>Demo 2: Fault Tolerance + Telemetry (Solution - Complete)</name>
+    <name>LangChain4j-CDI Demo 2 Fault Tolerance + Telemetry (Solution - Complete)</name>
 
     <dependencies>
         <!-- Jakarta EE -->
@@ -70,19 +70,20 @@
     </dependencies>
 
     <build>
+        <finalName>demo-2</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <finalName>demo-2</finalName>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <configuration>
-                    <name>demo-2.war</name>
+                    <name>${project.build.finalName}.war</name>
                     <packagingScripts>
                         <packaging-script>
                             <scripts>

@@ -64,19 +64,20 @@
     </dependencies>
 
     <build>
+        <finalName>demo-3</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <finalName>demo-3</finalName>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <configuration>
-                    <name>demo-3.war</name>
+                    <name>${project.build.finalName}.war</name>
                 </configuration>
             </plugin>
         </plugins>

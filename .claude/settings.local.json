@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name \".project\" -delete && find . -name \".classpath\" -delete && find . -type d -name \".settings\" -exec rm -rf {} + 2>/dev/null; echo \"Done\")",
+      "Bash(grep:*)",
+      "Bash(chmod +x:*)"
+    ]
+  }
+}
