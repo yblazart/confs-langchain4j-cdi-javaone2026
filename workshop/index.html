@@ -834,9 +834,42 @@ cd confs-langchain4j-cdi-javaone2026/demo-project</code></pre>
 
 <h3>2. Set Up Mistral AI</h3>
 
-<p>Sign up at <a href="https://console.mistral.ai/" target="_blank">console.mistral.ai</a> for a free API key, then export it:</p>
+<p>Sign up at <a href="https://console.mistral.ai/" target="_blank">console.mistral.ai</a> and follow these steps to get a free API key:</p>
 
-<pre><code>export MISTRAL_API_KEY=your-api-key-here</code></pre>
+<h4>Step 1: Access API Keys</h4>
+<p>From the Mistral AI Studio homepage, click on your profile icon (top-right corner), then select <strong>API Keys</strong>.</p>
+<img src="mistral_screen_shots/Mistral001.png" alt="Mistral AI Studio - Access API Keys from profile menu" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0;">
+
+<h4>Step 2: Choose a Plan</h4>
+<p>On the API Keys page, you will see a warning: <em>"No plan is currently active on this organization, the API keys will not be active."</em> Click <strong>Choose a plan</strong> to activate your keys.</p>
+<img src="mistral_screen_shots/Mistral002.png" alt="Mistral AI - API Keys page with plan warning" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0;">
+
+<div class="callout warning">
+    <div class="callout-title">&#9888;&#65039; Important</div>
+    <p>Without an active plan, your API keys will be created but <strong>will not work</strong>. You will get an <code>Unauthorized</code> error when calling the API.</p>
+</div>
+
+<h4>Step 3: Select the Free "Experiment" Plan</h4>
+<p>Choose the <strong>Experiment</strong> plan (left side) &mdash; it is completely <strong>free</strong> and gives you access to all frontier AI models. Click <strong>"Experiment for free"</strong>.</p>
+<img src="mistral_screen_shots/Mistral003.png" alt="Mistral AI - Choose the free Experiment plan" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0;">
+
+<h4>Step 4: Accept Terms and Subscribe</h4>
+<p>Check the box to accept the Terms of Service and Privacy Policy, then click <strong>Subscribe</strong>.</p>
+<img src="mistral_screen_shots/Mistral004.png" alt="Mistral AI - Sign up to Experiment plan" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0;">
+
+<p>You will then be asked to provide your <strong>phone number</strong> to receive an <strong>SMS activation code</strong>. This is required to activate the free Experiment plan.</p>
+
+<h4>Step 5: Create and Export Your API Key</h4>
+<p>Once your plan is activated, go back to the API Keys page and click <strong>"Create new key"</strong>. Copy the key immediately &mdash; you won't be able to see it again.</p>
+<img src="mistral_screen_shots/Mistral005.png" alt="Mistral AI - API key successfully created" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0;">
+
+<p>Then export it in your terminal:</p>
+
+<pre><code># Linux / macOS
+export MISTRAL_API_KEY=your-api-key-here
+
+# Windows (PowerShell)
+$env:MISTRAL_API_KEY="your-api-key-here"</code></pre>
 
 <div class="callout tip">
     <div class="callout-title">&#128161; Alternative: Local Ollama</div>
