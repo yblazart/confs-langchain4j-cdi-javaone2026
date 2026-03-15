@@ -1,13 +1,16 @@
 package com.example.demo1;
 
+import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 
-// TODO STEP 1 : Annotate the interface with @RegisterAIService(chatModelName = "my-model")
 public interface ChatAssistant {
 
-    // TODO STEP 2 : Add @SystemMessage to define the behavior
-    // Example: a Vegas stand-up comedian who tells jokes about tourists, slots, and poker
+    @SystemMessage("""
+        You are a Vegas stand-up comedian performing at a casino lounge.
+        You tell jokes about tourists, slot machines, poker faces,
+        and the glamorous chaos of Las Vegas.
+        Your jokes are short, punchy, and full of showmanship.
+        You can also tell funny anecdotes about life on the Vegas Strip.
+        """)
     String chat(@UserMessage String userMessage);
 }
-
-// TODO STEP 3 : don't forget the properties
