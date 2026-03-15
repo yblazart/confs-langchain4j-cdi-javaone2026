@@ -6,8 +6,10 @@
 
     <parent>
         <groupId>com.example</groupId>
+        <artifactId>demo-3-mcp</artifactId>
         <artifactId>langchain4j-cdi-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -15,6 +17,17 @@
     <packaging>war</packaging>
     <name>LangChain4j-CDI Demo 3 Solution (Complete)</name>
     <description>Complete solution WAR module for Casino Dice game demo</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakartaee>10.0.0</jakartaee>
+        <version.wildfly.server>39.0.1.Final</version.wildfly.server>
+        <version.compiler.plugin>3.13.0</version.compiler.plugin>
+        <version.war.plugin>3.4.0</version.war.plugin>
+        <version.wildfly.maven.plugin>5.1.5.Final</version.wildfly.maven.plugin>
+    </properties>
 
     <dependencies>
         <!-- Jakarta EE -->
@@ -36,10 +49,12 @@
         <dependency>
             <groupId>dev.langchain4j.cdi</groupId>
             <artifactId>langchain4j-cdi-core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j.cdi</groupId>
             <artifactId>langchain4j-cdi-portable-ext</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j.cdi.mp</groupId>
@@ -50,6 +65,7 @@
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>
@@ -70,20 +86,42 @@
     </dependencies>
 
     <build>
-        <finalName>demo-3</finalName>
         <plugins>
+            <!--Configuration of the maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration></configuration>
+            </plugin>
+
+            <!--Build configuration for the WAR plugin: -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>${version.war.plugin}</version>
                 <configuration>
-                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+                    <!-- Jakarta EE doesn't require web.xml, Maven needs to catch up! -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <finalName>demo-3</finalName>
                 </configuration>
             </plugin>
+
+            <!-- The WildFly plugin deploys your war to a local JBoss AS container -->
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
                 <configuration>
-                    <name>${project.build.finalName}.war</name>
+                    <discoverProvisioningInfo>
+                        <spaces>
+                            <space>incubating</space>
+                        </spaces>
+                        <version>${version.wildfly.server}</version>
+                        <suggest>true</suggest>
+                    </discoverProvisioningInfo>
+                    <name>ROOT.war</name>
+                    <name>demo-3.war</name>
                     <packagingScripts>
                         <packaging-script>
                             <scripts>
@@ -92,7 +130,15 @@
                         </packaging-script>
                     </packagingScripts>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 </project>
+
