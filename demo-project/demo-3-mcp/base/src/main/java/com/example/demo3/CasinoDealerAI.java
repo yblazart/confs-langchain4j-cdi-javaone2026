@@ -1,4 +1,4 @@
-package com.example.demo4;
+package com.example.demo3;
 
 // TODO: Import the necessary LangChain4j annotations
 // import dev.langchain4j.cdi.spi.RegisterAIService;

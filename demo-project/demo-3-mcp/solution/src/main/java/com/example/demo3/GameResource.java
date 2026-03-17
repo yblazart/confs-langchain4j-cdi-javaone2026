@@ -1,4 +1,4 @@
-package com.example.demo4;
+package com.example.demo3;
 
 import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -6,10 +6,15 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * REST endpoint for playing Craps in the Vegas casino.
+ * REST endpoint for the Craps game at "The Golden Ace Casino".
  *
- * This endpoint exposes the AI agent that hosts the dice game
- * and uses MCP tools to manage dice rolls.
+ * <p>Delegates all game logic to {@link CasinoDealerAI}. Three endpoints are exposed
+ * under {@code /api/game}:
+ * <ul>
+ *   <li>{@code GET  /start} — greet the player and start a new session.</li>
+ *   <li>{@code POST /play}  — send a player action (plain text) and receive the dealer's response.</li>
+ *   <li>{@code GET  /health} — liveness check.</li>
+ * </ul>
  */
 @Path("/game")
 @ApplicationScoped
@@ -19,18 +24,12 @@ public class GameResource {
     CasinoDealerAI gameMaster;
 
     /**
-     * Play an action in the Craps game.
+     * Send a player action to the dealer and receive the game response.
      *
-     * Usage example:
-     * POST /api/game/play
-     * Content-Type: text/plain
+     * <p>Example: {@code POST /api/game/play} with body {@code Roll the dice}
      *
-     * Roll the dice
-     *
-     * The dealer will:
-     * 1. Roll 2d6 for the shooter via MCP
-     * 2. Announce the result (natural, craps, or point)
-     * 3. Track the point across rolls in the same round
+     * <p>The dealer will invoke the MCP {@code roll} tool to roll 2d6, then
+     * announce the outcome (natural, craps, point set, hit, or seven-out).
      */
     @POST
     @Path("/play")
@@ -41,7 +40,7 @@ public class GameResource {
     }
 
     /**
-     * Enter the casino and start a game.
+     * Greet the player and start a new game session.
      */
     @GET
     @Path("/start")

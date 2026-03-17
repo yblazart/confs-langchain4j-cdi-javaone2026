@@ -1,20 +1,26 @@
-package com.example.demo4;
+package com.example.demo3;
 
 import dev.langchain4j.cdi.spi.RegisterAIService;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 
 /**
- * AI agent that hosts a Craps dice game in a Vegas casino.
+ * AI agent acting as a Craps dealer at "The Golden Ace Casino".
  *
- * This agent is connected to the MCP server which exposes tools for:
- * - Rolling six-sided dice (d6)
- * - Rolling multiple dice (for Craps)
+ * <p>Registered via {@code @RegisterAIService} with:
+ * <ul>
+ *   <li>{@code chatModelName = "mistral"} — local Ollama model (ministral-3b).</li>
+ *   <li>{@code toolProviderName = "mcp"} — MCP server that exposes the {@code roll} tool
+ *       for rolling N six-sided dice.</li>
+ *   <li>{@code chatMemoryProviderName = "my-memory"} — {@link ChatMemoryProviderBean},
+ *       which keeps the two most recent exchanges so the model can compare
+ *       the current roll result with the previous one.</li>
+ * </ul>
  *
- * The agent uses these tools to manage dice rolls during the game
- * and bring the casino atmosphere to life.
+ * <p>The agent is strictly required to use the {@code roll} tool for every dice roll
+ * and must never invent results.
  */
-@RegisterAIService(chatModelName = "mistral", toolProviderName = "mcp")
+@RegisterAIService(chatModelName = "mistral", toolProviderName = "mcp", chatMemoryProviderName = "my-memory")
 public interface CasinoDealerAI {
 
     @SystemMessage("""
