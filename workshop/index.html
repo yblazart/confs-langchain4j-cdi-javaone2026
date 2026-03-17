@@ -1552,6 +1552,26 @@ java -jar target/mcp-server-1.0-SNAPSHOT-jar-with-dependencies.jar</code></pre>
         <div class="callout-title">&#128161; Keep this running</div>
         <p>Leave the MCP server running in a separate terminal. The AI agent will connect to it via HTTP SSE on <code>localhost:8090/sse</code>.</p>
     </div>
+
+    <h3 style="margin-top: 1.5em;">Test with MCP Inspector</h3>
+    <p>Before wiring the MCP server into the AI agent, you can verify it works using the <strong>MCP Inspector</strong> &mdash; a visual debugging tool for MCP servers. In a new terminal:</p>
+
+    <pre><code># From the demo-3-mcp directory
+cd demo-project/demo-3-mcp
+./run-mcp-inspector.sh</code></pre>
+
+    <p>This opens a web UI (usually at <code>http://localhost:6274</code>) connected to your MCP server. Click on the <strong>Tools</strong> tab, then on the <code>roll</code> tool to inspect it and test it interactively:</p>
+
+    <img src="mcp-inspector.png" alt="MCP Inspector showing the roll tool" style="max-width: 100%; border-radius: 12px; margin: 1em 0; border: 1px solid var(--border);">
+
+    <div class="callout tip">
+        <div class="callout-title">&#128736; What to check</div>
+        <ul style="margin: 0.5em 0 0 1.2em;">
+            <li>The connection status shows <strong>Connected</strong></li>
+            <li>The <code>roll</code> tool appears in the Tools list</li>
+            <li>Set <code>numberOfDice</code> to <code>2</code>, click <strong>Run Tool</strong>, and verify you get dice results back</li>
+        </ul>
+    </div>
 </div>
 </section>
 
