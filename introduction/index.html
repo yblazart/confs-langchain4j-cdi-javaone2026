@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangChain4j-CDI Workshop — Introduction — JavaOne 2026</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --r-background-color: #0a0a1a;
+            --r-main-font: 'Inter', sans-serif;
+            --r-heading-font: 'Inter', sans-serif;
+            --r-code-font: 'JetBrains Mono', monospace;
+            --r-main-color: #e0e0e0;
+            --r-heading-color: #ffffff;
+            --r-link-color: #64b5f6;
+            --accent-orange: #ff6b35;
+            --accent-blue: #4fc3f7;
+            --accent-green: #81c784;
+            --accent-purple: #b39ddb;
+            --accent-yellow: #ffd54f;
+        }
+
+        .reveal { font-size: 32px; }
+        .reveal h1 { font-size: 2.2em; font-weight: 900; letter-spacing: -0.02em; }
+        .reveal h2 { font-size: 1.6em; font-weight: 700; color: var(--accent-blue); }
+        .reveal h3 { font-size: 1.2em; font-weight: 600; color: var(--accent-orange); }
+        .reveal code { font-family: var(--r-code-font); font-size: 0.85em; }
+        .reveal pre { width: 95%; margin: 0.5em auto; }
+        .reveal pre code { padding: 1em; border-radius: 12px; line-height: 1.4; max-height: 520px; }
+        .reveal section img { border: none; box-shadow: none; background: none; }
+
+        .accent { color: var(--accent-orange); font-weight: 700; }
+        .accent-blue { color: var(--accent-blue); }
+        .accent-green { color: var(--accent-green); }
+        .accent-purple { color: var(--accent-purple); }
+        .small { font-size: 0.65em; color: #999; }
+        .medium { font-size: 0.8em; }
+        .big { font-size: 1.3em; }
+        .huge { font-size: 2em; font-weight: 900; }
+
+        .two-col { display: flex; gap: 2em; align-items: flex-start; }
+        .two-col > * { flex: 1; }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15em 0.6em;
+            border-radius: 8px;
+            font-size: 0.7em;
+            font-weight: 600;
+            margin: 0.1em;
+        }
+        .badge-orange { background: var(--accent-orange); color: #000; }
+        .badge-blue { background: var(--accent-blue); color: #000; }
+        .badge-green { background: var(--accent-green); color: #000; }
+        .badge-purple { background: var(--accent-purple); color: #000; }
+
+        .emoji-big { font-size: 2.5em; }
+
+        .speaker-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5em;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.2em;
+            margin: 0.5em 0;
+            border-left: 4px solid var(--accent-orange);
+        }
+        .speaker-card.emmanuel { border-left-color: var(--accent-blue); }
+        .speaker-card .avatar {
+            font-size: 3em;
+            min-width: 80px;
+            text-align: center;
+        }
+        .speaker-card .info { text-align: left; }
+        .speaker-card .info h3 { margin: 0 0 0.2em 0; font-size: 1.1em; }
+        .speaker-card .info p { margin: 0; font-size: 0.7em; color: #bbb; }
+
+        .timeline {
+            text-align: left;
+            padding-left: 2em;
+        }
+        .timeline .step {
+            position: relative;
+            padding: 0.5em 0 0.5em 1.5em;
+            border-left: 2px solid #444;
+        }
+        .timeline .step::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0.8em;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+        }
+        .timeline .step.blue::before   { background: var(--accent-blue); }
+        .timeline .step.green::before  { background: var(--accent-green); }
+        .timeline .step.purple::before { background: var(--accent-purple); }
+        .timeline .step.yellow::before { background: var(--accent-yellow); }
+
+        .box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1em;
+            margin: 0.5em 0;
+        }
+        .box-accent { border: 1px solid var(--accent-orange); }
+        .box-blue   { border: 1px solid var(--accent-blue); }
+
+        .server-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+            margin: 1em 0;
+        }
+        .server-item {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 0.8em 1.2em;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .speaker-tag { display: none; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================= -->
+<!-- SLIDE 1: Title                                -->
+<!-- ============================================= -->
+<section>
+    <img src="../slides/cbgmd-javaone26-hero.webp"
+         alt="JavaOne 2026"
+         style="position: absolute; top: 0; right: 0; max-width: 180px; z-index: 10;">
+    <img src="../slides/langchain4j-cdi-logo.png"
+         onerror="this.src='https://raw.githubusercontent.com/langchain4j/langchain4j-cdi/main/langchain4j-cdi-logo.png'"
+         alt="LangChain4j-CDI" style="max-width: 280px; margin-bottom: 0.3em;">
+    <h1>LangChain4j-CDI</h1>
+    <h3 style="color: var(--accent-blue);">Generative AI<br>Natively Injectable in Jakarta EE</h3>
+    <p class="small" style="margin-top: 1em;">
+        <span class="accent">Yann Blazart</span> &amp; <span class="accent">Emmanuel Hugonnet</span>
+    </p>
+    <p class="small">JavaOne 2026 — Hands-on Workshop</p>
+    <aside class="notes">
+        Welcome everyone to this hands-on workshop! Today you won't just watch slides — you'll build real AI agents running on WildFly.
+
+        We have three progressive exercises lined up. By the end you'll have injected an AI agent with a single annotation, wired it to MicroProfile Fault Tolerance, and connected it to external tools via MCP.
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 2: Disclaimer                           -->
+<!-- ============================================= -->
+<section data-background-gradient="linear-gradient(135deg, #2a0a0a, #1a0a00)">
+    <p class="emoji-big">&#9888;&#65039;</p>
+    <h2 style="color: var(--accent-orange);">Disclaimer</h2>
+    <p class="big" style="margin-top: 0.5em;">
+        This presentation was <span class="accent">shamelessly generated</span> with the help of AI.
+    </p>
+    <p class="fragment medium" style="margin-top: 1em; color: #ccc;">
+        Don't worry, the speakers are <em>real</em>.<br>
+        <span class="fragment">Well... we haven't verified with a CAPTCHA yet.</span>
+    </p>
+    <p class="fragment small" style="margin-top: 1.5em; color: #999;">
+        No Jakarta EE developer was harmed during the production of these slides. But we won't talk about the odds in Vegas &#127920;<br>
+        <span class="fragment">The LLM, however, did 247 retries.</span>
+    </p>
+    <aside class="notes">
+        Disclaimer slide. Lean into it — we fully own that AI helped build these slides. It gets a laugh and fits perfectly with the topic.
+
+        If someone laughs at the CAPTCHA line, follow up with: "Seriously though, if you want to verify us, ask us to identify traffic lights in a grid."
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 3: Yann                                 -->
+<!-- ============================================= -->
+<section>
+    <h2>Who am I?</h2>
+    <div class="speaker-card" style="border-left-width: 6px;">
+        <div class="avatar"><img src="../slides/yb.jpg" alt="Yann Blazart" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"></div>
+        <div class="info">
+            <h3 style="color: var(--accent-orange);">Yann Blazart</h3>
+            <p>25+ years in Java &bull; CDI enthusiast &bull; Co-creator of langchain4j-cdi</p>
+            <p>Speaker in my spare time (and when someone will have me)</p>
+            <p><span class="badge badge-orange">Jakarta EE</span> <span class="badge badge-orange">CDI</span> <span class="badge badge-orange">LangChain4j</span></p>
+        </div>
+    </div>
+    <div class="fragment" style="margin-top: 1.2em; text-align: center;">
+        <p class="medium" style="color: #ccc; margin-top: 0.3em;">
+            Tech Lead @ <strong style="color: var(--accent-orange);">SCIAM</strong> — IT consulting and expertise
+        </p>
+        <p class="small" style="color: #999;">
+            <a href="https://twitter.com/yblazart" style="color: var(--accent-blue);">@yblazart</a>
+        </p>
+    </div>
+    <aside class="notes">
+        Yann introduces himself.
+
+        25 years of Java, started back when we were still coding with EJB 2.1 and 500-line XML descriptors.
+
+        I work at SCIAM — "Uncle SCIAM needs you" — a consulting firm specializing in cognitive sciences and AI.
+
+        Co-creator of langchain4j-cdi with Emmanuel and Buhake Sindi.
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 4: Emmanuel                             -->
+<!-- ============================================= -->
+<section>
+    <h2>My co-pilot</h2>
+    <div class="speaker-card emmanuel" style="border-left-width: 6px;">
+        <div class="avatar"><img src="../slides/eh.jpg" alt="Emmanuel Hugonnet" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"></div>
+        <div class="info">
+            <h3 style="color: var(--accent-blue);">Emmanuel Hugonnet (ehsavoie)</h3>
+            <p>25+ years in Java &bull; Developer &bull; Co-creator of langchain4j-cdi</p>
+            <p>WildFly core developer</p>
+            <p><span class="badge badge-blue">WildFly</span> <span class="badge badge-blue">Apache NetBeans</span> <span class="badge badge-blue">LangChain4j</span></p>
+        </div>
+    </div>
+    <div class="fragment" style="margin-top: 1.2em; text-align: center;">
+        <p style="font-size: 1.6em; font-weight: 900;">
+            &#x1F41D; <span style="color: #002d9c;"><span class="accent-blue">IBM</span></span>
+        </p>
+        <p class="medium" style="color: #ccc; margin-top: 0.3em;">
+            The one who runs <strong style="color: var(--accent-blue);">WildFly</strong> so you don't have to
+        </p>
+        <p class="small" style="color: #999;">
+            <a href="https://twitter.com/ehsavoie" style="color: var(--accent-blue);">@ehsavoie</a>
+        </p>
+    </div>
+    <p class="fragment small" style="margin-top: 0.8em; color: #777;">
+        Between the two of us, we have 50 years of Java experience. It doesn't make us any younger. &#x1F474;&#x1F474;
+    </p>
+    <aside class="notes">
+        Emmanuel introduces himself (or Yann introduces him).
+
+        He integrates AI into WildFly: WildFly AI Feature Pack (LC4J-CDI, MCP Server, WASM WASI) and A2A Java/JakartaEE SDK.
+
+        Between the two of us, 50 years of Java. We are dinosaurs, but dinosaurs with AI now.
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 5: The context                          -->
+<!-- ============================================= -->
+<section>
+    <h2>The context today</h2>
+    <p class="big">You may have seen:</p>
+    <p>LangChain4j + <span class="accent-green">&#x1F0CF; Quarkus</span> = &#x1F916; Smart Chatbot</p>
+    <div class="fragment" style="margin-top: 1em;">
+        <p class="big">But in production, you have:</p>
+        <div class="server-grid">
+            <div class="server-item">&#x1F41D; WildFly</div>
+            <div class="server-item">&#x1F420; Payara</div>
+            <div class="server-item">&#x1F985; Liberty</div>
+            <div class="server-item">&#x2600;&#xFE0F; Helidon</div>
+            <div class="server-item">&#x1F421; GlassFish</div>
+            <div class="server-item">&#x1F0CF; Quarkus</div>
+        </div>
+    </div>
+    <p class="fragment huge" style="margin-top: 0.5em;">So now what? &#x1F914;</p>
+    <aside class="notes">
+        You may have seen great demos with LangChain4j on Quarkus. Slick, smooth, worked on the first try (well, almost).
+
+        But real talk: how many of you have WildFly in production? (hands up!) Payara? Liberty? ... GlassFish? (moment of silence)
+
+        Good news: you don't need to rip and replace your entire stack to do AI. That's exactly why we created langchain4j-cdi.
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 6: The answer                           -->
+<!-- ============================================= -->
+<section data-background-gradient="linear-gradient(135deg, #1a1a2e, #16213e)">
+    <h2>The answer:</h2>
+    <p class="huge"><span class="accent">@RegisterAIService</span></p>
+    <p class="big" style="margin-top: 0.5em;">
+        <span class="accent-blue">CDI</span> bridges
+        <span class="accent-green">LangChain4j</span> and your server
+    </p>
+    <p class="fragment medium" style="margin-top: 1em; color: #999;">
+        <em>"Inject an AI agent as naturally as an EntityManager"</em>
+    </p>
+    <aside class="notes">
+        The answer fits in one annotation: @RegisterAIService.
+
+        CDI already injects everything in your apps. EntityManager, DataSource, REST clients... so why not an AI agent?
+
+        That's exactly what we built. A CDI extension that turns an annotated interface into an injectable bean, wired to LangChain4j under the hood. Same patterns you already know, brand new capabilities.
+    </aside>
+</section>
+
+<!-- ============================================= -->
+<!-- SLIDE 7: Workshop Agenda                      -->
+<!-- ============================================= -->
+<section>
+    <h2>Workshop agenda</h2>
+    <div class="timeline" style="font-size: 0.9em;">
+        <div class="step fragment">
+            <strong>&#x2699;&#xFE0F; Setup &amp; Architecture</strong>
+            <span class="small"> — Prerequisites, stack overview, CDI extension internals</span>
+        </div>
+        <div class="step blue fragment">
+            <strong>&#x1F4AC; Exercise 1 — Injectable AI Agent</strong>
+            <span class="small"> — <code>@RegisterAIService</code>, streaming, multimodal vision</span>
+        </div>
+        <div class="step green fragment">
+            <strong>&#x1F6E1;&#xFE0F; Exercise 2 — Resilience &amp; Observability</strong>
+            <span class="small"> — Memory, RAG, Tools, <code>@Retry</code>, <code>@CircuitBreaker</code>, OpenTelemetry</span>
+        </div>
+        <div class="step purple fragment">
+            <strong>&#x1F50C; Exercise 3 — MCP Integration</strong>
+            <span class="small"> — Model Context Protocol, external tool providers</span>
+        </div>
+        <div class="step yellow fragment">
+            <strong>&#x1F680; Wrap Up &amp; What's Next</strong>
+            <span class="small"> — A2A, roadmap, Q&amp;A</span>
+        </div>
+    </div>
+    <p class="fragment small" style="margin-top: 1em; color: #777;">
+        Each exercise has a <code>base/</code> skeleton and a <code>solution/</code> reference — work at your own pace.
+    </p>
+    <aside class="notes">
+        Here's our game plan for the next few hours.
+
+        We start with a quick setup check and a theory overview of how the CDI extension works under the hood — Emmanuel's territory.
+
+        Then three hands-on exercises, each building on the previous one. Exercise 1 is your first AI agent with a single annotation. Exercise 2 adds resilience and observability on top. Exercise 3 connects your agent to the outside world via MCP.
+
+        Each exercise has a base/ skeleton with TODOs and a solution/ for when you're stuck. No judgment — the solution is there for a reason.
+
+        Let's go!
+    </aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        transition: 'slide',
+        backgroundTransition: 'fade',
+        plugins: [ RevealHighlight, RevealNotes ]
+    });
+</script>
+</body>
+</html>
